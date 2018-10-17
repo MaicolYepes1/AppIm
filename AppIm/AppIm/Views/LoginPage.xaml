@@ -7,16 +7,14 @@
     <ContentPage.Content>
         <ScrollView 
             BindingContext="{Binding Login}">
+            
             <StackLayout Padding="5">
-                <Label Margin="0,20" 
-                       Text="Bienvenidos IM Aplication" 
-                       TextColor="#5A9EB3"
-                       HorizontalOptions="CenterAndExpand" 
-                       FontSize="Large"
-                       FontAttributes="Bold"></Label>
-                <Image Source="Logo" WidthRequest="200">
+                
+                <Image Source="Logo" WidthRequest="200"
+                       HorizontalOptions="Center">
                 </Image>
-                <Grid Margin="10,0" VerticalOptions="FillAndExpand">
+                <Label></Label>
+                <Grid Margin="10,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
@@ -27,37 +25,35 @@
                            Grid.Column="0"
                            TextColor="#5A9EB3"></Label>
                     <Entry Placeholder="Usuario"
-                            TextColor="#5A9EB3"
+                           TextColor="#5A9EB3"
                            Grid.Row="0" 
                            Grid.Column="1"
                            Text="{Binding Usuario, Mode=TwoWay}"></Entry>
                     <Label VerticalOptions="Center" 
                            Text="Contraseña :" 
-                            TextColor="#5A9EB3"
+                           TextColor="#5A9EB3"
                            Grid.Row="1" 
                            Grid.Column="0" ></Label>
                     <Entry IsPassword="True" 
                            Placeholder="Contraseña"
                            Grid.Row="1"
-                            TextColor="#5A9EB3"
                            Grid.Column="1"
                            Text="{Binding Contraseña, Mode=TwoWay}"></Entry>
                 </Grid>
-
                 <StackLayout Margin="10,0"
                              Orientation="Horizontal">
-                    <Label VerticalOptions="CenterAndExpand"
+                    <Label VerticalOptions="Center"
                             TextColor="#5A9EB3"
                         Text="Recordarme en enté dispositivo :"
                         HorizontalOptions="StartAndExpand"></Label>
                     <Switch IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                             HorizontalOptions="End"></Switch>
                 </StackLayout>
-                <Label Text="Olvidó su contraseña?" TextColor="Blue"></Label>
-                <ActivityIndicator VerticalOptions="FillAndExpand" 
+                <ActivityIndicator  
                                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
-                <Button VerticalOptions="CenterAndExpand"
+                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Ingresar" 
                         TextColor="#5A9EB3" 

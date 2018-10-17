@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AppIm
 {
+
     public partial class App : Application
     {
         #region Constructors

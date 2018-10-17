@@ -9,8 +9,8 @@ using Xamarin.Forms.Xaml;
 
 namespace AppIm.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LoginPage : ContentPage
 	{
 		public LoginPage ()
 		{
