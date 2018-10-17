@@ -1,13 +1,14 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
+    using AppIm.Views;
+    using GalaSoft.MvvmLight.Command;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Text;
+    using System.Windows.Input;
+    using Xamarin.Forms;
+
     public class LoginViewModel : BaseViewModel
     {
         #region Atributos
@@ -18,6 +19,9 @@ namespace AppIm.ViewModels
 
         #endregion
 
+        #region Servicios
+        private WebServices service;
+        #endregion
 
         #region Propiedades
         public bool IsEnabled
@@ -31,11 +35,17 @@ namespace AppIm.ViewModels
                 SetValue(ref isEnabled, value);
             }
         }
-        
+
         public string Usuario
         {
-            get;
-            set;
+            get
+            {
+                return this.usuario;
+            }
+            set
+            {
+                SetValue(ref usuario, value);
+            }
         }
         public string Contraseña
         {
@@ -47,7 +57,6 @@ namespace AppIm.ViewModels
             {
                 SetValue(ref contraseña, value);
             }
-            
         }
         public bool IsRemembered
         {
@@ -66,8 +75,7 @@ namespace AppIm.ViewModels
             }
         }
         #endregion
-
-
+        
         #region Constructores
         public LoginViewModel()
         {
@@ -111,6 +119,12 @@ namespace AppIm.ViewModels
             }
             this.IsRunning = false;
             this.IsEnabled = true;
+
+            this.Usuario = string.Empty;
+            this.Contraseña = string.Empty;
+
+            MainViewModel.GetInstance().Menu = new MenuViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
 
         }
         #endregion

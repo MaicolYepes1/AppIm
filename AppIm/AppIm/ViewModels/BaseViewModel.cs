@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.Generic;
-
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
+    using System;
     using System.Collections.Generic;
+    using System.Text;
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
