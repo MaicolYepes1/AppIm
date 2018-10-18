@@ -16,6 +16,10 @@ namespace AppIm.ViewModels
         private ObservableCollection<OpcionesMenu> menu;
         #endregion
 
+        #region Servicios
+        private WebService webService;
+        #endregion
+
         #region Propiedades
         public ObservableCollection<OpcionesMenu> Menu
         {
@@ -39,9 +43,9 @@ namespace AppIm.ViewModels
         #endregion
 
         #region Metodos
-        private void LoadOpcionesMenu()
+        private async void LoadOpcionesMenu()
         {
-            throw new NotImplementedException();
+            var response = await this.webService.GetList<Responds>();
         }
         #endregion
     }

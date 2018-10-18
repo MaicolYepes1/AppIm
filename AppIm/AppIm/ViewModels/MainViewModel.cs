@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
         #region ViewModels
 
@@ -24,6 +24,11 @@
         public MainViewModel()
         {
             this.Login = new LoginViewModel();
+        }
+
+        public MainViewModel()
+        {
+            this.LoadOpcionesMenu();
         }
         #endregion
 
