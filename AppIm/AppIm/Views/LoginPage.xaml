@@ -2,15 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.LoginPage"
+             BackgroundColor="#F4FEFF"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Login">
-    <ContentPage.Content>
+
+    <ContentPage.Content >
         <ScrollView 
             BindingContext="{Binding Login}">
-            
+
             <StackLayout Padding="5">
-                
-                <Image Source="LogoIM1" WidthRequest="200"
+
+                <Image Margin="50"
+                       Source="LogoIM1.png" WidthRequest="200"
                        HorizontalOptions="Center">
                 </Image>
                 <Label></Label>
@@ -23,18 +26,21 @@
                            Text="Usuario :"
                            Grid.Row="0" 
                            Grid.Column="0"
-                           TextColor="#5A9EB3"></Label>
+                           TextColor="Black"></Label>
                     <Entry Placeholder="Usuario"
-                           TextColor="#5A9EB3"
+                           TextColor="Black"
+                           PlaceholderColor="Gray"
                            Grid.Row="0" 
                            Grid.Column="1"
                            Text="{Binding Usuario, Mode=TwoWay}"></Entry>
-                    <Label VerticalOptions="Center" 
+                    <Label VerticalOptions="Center"
+                           TextColor="Black"
                            Text="Contraseña :" 
-                           TextColor="#5A9EB3"
                            Grid.Row="1" 
                            Grid.Column="0" ></Label>
-                    <Entry IsPassword="True" 
+                    <Entry IsPassword="True"
+                           TextColor="Black"
+                            PlaceholderColor="Gray"
                            Placeholder="Contraseña"
                            Grid.Row="1"
                            Grid.Column="1"
@@ -43,10 +49,11 @@
                 <StackLayout Margin="10,0"
                              Orientation="Horizontal">
                     <Label VerticalOptions="Center"
-                            TextColor="#5A9EB3"
-                        Text="Recordarme en enté dispositivo :"
-                        HorizontalOptions="StartAndExpand"></Label>
-                    <Switch IsToggled="{Binding IsRemembered, Mode=TwoWay}"
+                           TextColor="Black"
+                           Text="Recordarme en enté dispositivo :"
+                           HorizontalOptions="StartAndExpand"></Label>
+                    <Switch OnColor="White"
+                            IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                             HorizontalOptions="End"></Switch>
                 </StackLayout>
                 <ActivityIndicator  
@@ -56,9 +63,9 @@
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Ingresar" 
-                        TextColor="#5A9EB3" 
+                        TextColor="Black"
                         BorderRadius="23" 
-                        BackgroundColor="#E8F5FD" 
+                        BackgroundColor="#A9E8DC" 
                         HeightRequest="46"
                         Command="{Binding LoginCommand}"/>
             </StackLayout>

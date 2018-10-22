@@ -2,12 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.MenuPage"
+             BackgroundColor="#F4FEFF"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Menu">
     <ContentPage.Content>
         <StackLayout Padding="5"
                      BindingContext="{Binding OpcionesMenu}">
-            <ListView >
+            <Label FontAttributes="Bold"
+             FontSize="Small"
+             FormattedText="{Binding Menu}"
+             TextColor="Blue"
+             Text="Inteligencia Aduana">
+            </Label>
+            <ListView 
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                ItemsSource="{Binding OpcionesMenu}"
+                RefreshCommand="{Binding RefresCommand}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <StackLayout
+                                    VerticalOptions="Center">
+                                    <Label FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           FormattedText="{Binding Menu}"
+                                           TextColor="Blue"
+                                           Text="Inteligencia Aduana">
+                                    </Label> 
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
             </ListView>
         </StackLayout>

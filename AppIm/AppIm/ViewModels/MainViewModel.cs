@@ -29,8 +29,8 @@
 
         //public MainViewModel()
         //{
-        //    this.LoadOpcionesMenu();
-        //}
+           
+        //    this.LoadOpcionesMenu(),
         #endregion
 
         #region Singleton

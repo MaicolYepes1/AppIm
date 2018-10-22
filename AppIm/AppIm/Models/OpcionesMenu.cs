@@ -6,5 +6,11 @@ namespace AppIm.Models
 {
     public class OpcionesMenu
     {
+        public string Menu
+        {
+            get;
+            set;
+        }
+            
     }
 }

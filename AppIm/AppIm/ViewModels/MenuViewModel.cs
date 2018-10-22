@@ -1,6 +1,4 @@
-﻿
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +7,14 @@ namespace AppIm.ViewModels
     using Xamarin.Forms;
     using Models;
     using AppIm.Services;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
 
     public class MenuViewModel : BaseViewModel
     {
         #region Atributos
         private ObservableCollection<OpcionesMenu> menu;
+        private bool isRefreshing;
         #endregion
 
         #region Servicios
@@ -32,21 +33,63 @@ namespace AppIm.ViewModels
                 SetValue(ref menu, value);
             }
         }
+        public bool IsRefreshing
+
+        {
+            get
+            {
+                return this.isRefreshing;
+            }
+            set
+            {
+                SetValue(ref isRefreshing, value);
+            }
+        }
+
         #endregion
 
         #region Constructores
         public MenuViewModel()
         {
             this.webService = new WebService();
-            this.LoadOpcionesMenu();
+            //this.LoadOpcionesMenu();
         }
         #endregion
 
         #region Metodos
-        //private async void LoadOpcionesMenu()
-        //{
-        //    var response = await this.webService.GetList<Responds>();
-        //}
+        private async void LoadOpcionesMenu()
+        {
+            this.IsRefreshing = true;
+            var connection = await this.webService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                this.IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connection.Message,
+                    "Aceptar");
+                await Application.Current.MainPage.Navigation.PopAsync();
+                return;
+            }
+
+
+            this.IsRefreshing = false;
+
+
+        }
+
+        #endregion
+
+        #region Comandos
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadOpcionesMenu);
+            }
+        }
         #endregion
     }
 }

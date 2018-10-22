@@ -127,7 +127,7 @@
             this.Usuario = string.Empty;
             this.Contraseña = string.Empty;
 
-            MainViewModel.GetInstance().Menu = new MenuViewModel(); // MenuViewModel();
+            MainViewModel.GetInstance().Menu = new MenuViewModel(); 
             await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
 
         }

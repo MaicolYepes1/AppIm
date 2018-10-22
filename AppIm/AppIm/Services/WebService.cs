@@ -11,27 +11,27 @@
 
     public class WebService
     {
-        public async Task<Response> CheckConnection()
+        public async Task<Responds> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                return new Response
+                return new Responds
                 {
                     IsSuccess = false,
-                    Message = "Valide su configuración de acceso a internet.",
+                    Message = "Por Favor Encienda el acceso a internet.",
                 };
             }
             var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
            "google.com");
             if (!isReachable)
             {
-                return new Response
+                return new Responds
                 {
                     IsSuccess = false,
                     Message = "Valide su conexión a internet.",
                 };
             }
-            return new Response
+            return new Responds
             {
                 IsSuccess = true,
                 Message = "OK",
