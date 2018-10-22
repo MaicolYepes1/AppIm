@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.MenuPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Inicio">
+             Title="Menu">
     <ContentPage.Content>
         <StackLayout Padding="5"
-                     BindingContext="{Binding Locator}">
-            <ScrollView>
-            </ScrollView>
+                     BindingContext="{Binding OpcionesMenu}">
+            <ListView >
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

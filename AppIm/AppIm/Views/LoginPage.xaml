@@ -10,7 +10,7 @@
             
             <StackLayout Padding="5">
                 
-                <Image Source="Logo" WidthRequest="200"
+                <Image Source="LogoIM1" WidthRequest="200"
                        HorizontalOptions="Center">
                 </Image>
                 <Label></Label>

@@ -43,10 +43,10 @@ namespace AppIm.ViewModels
         #endregion
 
         #region Metodos
-        private async void LoadOpcionesMenu()
-        {
-            var response = await this.webService.GetList<Responds>();
-        }
+        //private async void LoadOpcionesMenu()
+        //{
+        //    var response = await this.webService.GetList<Responds>();
+        //}
         #endregion
     }
 }

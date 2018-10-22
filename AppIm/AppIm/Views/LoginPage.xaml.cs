@@ -16,5 +16,7 @@ namespace AppIm.Views
 		{
 			InitializeComponent ();
 		}
+
+        
 	}
 }

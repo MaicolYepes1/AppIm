@@ -8,6 +8,8 @@
     using System.Text;
     using System.Windows.Input;
     using Xamarin.Forms;
+    using Services;
+    using AppIm.ViewModels;
 
     public class LoginViewModel : BaseViewModel
     {
@@ -20,7 +22,7 @@
         #endregion
 
         #region Servicios
-        private WebServices service;
+        private WebService webService;
         #endregion
 
         #region Propiedades
@@ -81,6 +83,8 @@
         {
             this.IsRemembered = true;
             this.IsEnabled = true;
+
+            ;
         }
         #endregion
 
@@ -101,7 +105,7 @@
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     "Debes ingresar nombre de usuario",
-                    "Correcto");
+                    "Aceptar");
                 return;
             }
 
@@ -123,7 +127,7 @@
             this.Usuario = string.Empty;
             this.Contraseña = string.Empty;
 
-            MainViewModel.GetInstance().Menu = new MenuViewModel();
+            MainViewModel.GetInstance().Menu = new MenuViewModel(); // MenuViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
 
         }

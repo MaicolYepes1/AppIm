@@ -23,13 +23,14 @@
         #region Constructores
         public MainViewModel()
         {
+            instance = this;
             this.Login = new LoginViewModel();
         }
 
-        public MainViewModel()
-        {
-            this.LoadOpcionesMenu();
-        }
+        //public MainViewModel()
+        //{
+        //    this.LoadOpcionesMenu();
+        //}
         #endregion
 
         #region Singleton

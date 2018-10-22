@@ -4,19 +4,18 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Threading.Tasks;
-    using Plugin.Connectivity;
     using Models;
     using System.Net.Http;
     using System.Net.Http.Headers;
-
+    using Plugin.Connectivity;
 
     public class WebService
     {
-        public async Task<Responds> CheckConnection()
+        public async Task<Response> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                return new Responds
+                return new Response
                 {
                     IsSuccess = false,
                     Message = "Valide su configuración de acceso a internet.",
@@ -26,13 +25,13 @@
            "google.com");
             if (!isReachable)
             {
-                return new Responds
+                return new Response
                 {
                     IsSuccess = false,
                     Message = "Valide su conexión a internet.",
                 };
             }
-            return new Responds
+            return new Response
             {
                 IsSuccess = true,
                 Message = "OK",
