@@ -10,7 +10,8 @@ namespace AppIm.Models
         {
             get;
             set;
-        }
+        } 
             
     }
+
 }

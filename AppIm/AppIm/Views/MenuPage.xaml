@@ -7,14 +7,14 @@
              Title="Menu">
     <ContentPage.Content>
         <StackLayout Padding="5"
-                     BindingContext="{Binding OpcionesMenu}">
+                     BindingContext="{Binding MenuP}">
             <Label FontAttributes="Bold"
              FontSize="Small"
              FormattedText="{Binding Menu}"
              TextColor="Blue"
              Text="Inteligencia Aduana">
             </Label>
-            <ListView 
+            <!--<ListView 
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
                 IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
@@ -38,7 +38,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
 
-            </ListView>
+            </ListView>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

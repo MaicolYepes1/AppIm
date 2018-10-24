@@ -2,21 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.LoginPage"
-             BackgroundColor="#F4FEFF"
+             BackgroundColor="White"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Login">
 
     <ContentPage.Content >
         <ScrollView 
             BindingContext="{Binding Login}">
-
             <StackLayout Padding="5">
-
-                <Image Margin="50"
+                <Image Margin="20"
                        Source="LogoIM1.png" WidthRequest="200"
                        HorizontalOptions="Center">
                 </Image>
-                <Label></Label>
                 <Grid Margin="10,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -50,14 +47,13 @@
                              Orientation="Horizontal">
                     <Label VerticalOptions="Center"
                            TextColor="Black"
-                           Text="Recordarme en enté dispositivo :"
+                           Text="Recordarme en esté dispositivo :"
                            HorizontalOptions="StartAndExpand"></Label>
-                    <Switch OnColor="White"
+                    <Switch 
                             IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                             HorizontalOptions="End"></Switch>
                 </StackLayout>
-                <ActivityIndicator  
-                                   IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
                 <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"

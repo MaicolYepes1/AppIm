@@ -18,7 +18,7 @@
         #endregion
 
         #region Servicios
-        private WebService webService;
+        //private WebService webService;
         #endregion
 
         #region Propiedades
@@ -51,45 +51,45 @@
         #region Constructores
         public MenuViewModel()
         {
-            this.webService = new WebService();
+            //this.webService = new WebService();
             //this.LoadOpcionesMenu();
         }
         #endregion
 
         #region Metodos
-        private async void LoadOpcionesMenu()
-        {
-            this.IsRefreshing = true;
-            var connection = await this.webService.CheckConnection();
+        //private async void LoadOpcionesMenu()
+        //{
+        //    //this.IsRefreshing = true;
+        //    ////var connection = await this.webService.CheckConnection();
 
-            if (!connection.IsSuccess)
-            {
-                this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    connection.Message,
-                    "Aceptar");
-                await Application.Current.MainPage.Navigation.PopAsync();
-                return;
-            }
-
-
-            this.IsRefreshing = false;
+        //    //if (!connection.IsSuccess)
+        //    //{
+        //    //    this.IsRefreshing = false;
+        //    //    await Application.Current.MainPage.DisplayAlert(
+        //    //        "Error",
+        //    //        connection.Message,
+        //    //        "Aceptar");
+        //    //    await Application.Current.MainPage.Navigation.PopAsync();
+        //    //    return;
+        //    //}
 
 
-        }
+        //    this.IsRefreshing = false;
+
+
+        //}
 
         #endregion
 
         #region Comandos
 
-        public ICommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(LoadOpcionesMenu);
-            }
-        }
+        //public ICommand RefreshCommand
+        //{
+        //    //get
+        //    //{
+        //    //    return new RelayCommand(LoadOpcionesMenu);
+        //    //}
+        //}
         #endregion
     }
 }

@@ -22,7 +22,7 @@
         #endregion
 
         #region Servicios
-        private WebService webService;
+        //private WebService webService;
         #endregion
 
         #region Propiedades
@@ -87,7 +87,7 @@
             ;
         }
         #endregion
-
+         
         #region Comandos
         public ICommand LoginCommand
         {
@@ -106,7 +106,7 @@
                     "Error",
                     "Debes ingresar nombre de usuario",
                     "Aceptar");
-                return;
+                     return;
             }
 
             this.IsRunning = false;
@@ -118,8 +118,8 @@
                     "Error",
                     "Debes ingresar una contraseña",
                     "Aceptar");
-                this.Contraseña = string.Empty;
-                return;
+                     this.Contraseña = string.Empty;
+                     return;
             }
             this.IsRunning = false;
             this.IsEnabled = true;
@@ -127,7 +127,7 @@
             this.Usuario = string.Empty;
             this.Contraseña = string.Empty;
 
-            MainViewModel.GetInstance().Menu = new MenuViewModel(); 
+            MainViewModel.GetInstance().MenuP = new MenuViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
 
         }

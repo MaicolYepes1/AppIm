@@ -13,7 +13,7 @@
             get;
             set;
         }
-        public MenuViewModel Menu
+        public MenuViewModel MenuP
         {
             get;
             set;

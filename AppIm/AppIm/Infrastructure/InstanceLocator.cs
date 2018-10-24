@@ -5,17 +5,18 @@ using System.Text;
 
 namespace AppIm.Infrastructure
 {
-    class InstanceLocator
+    public class InstanceLocator
     {
 
-        #region Properties
+        #region Propiedades
         public MainViewModel Main
         {
             get;
             set;
         }
         #endregion
-        #region Constructors
+
+        #region Constructores
         public InstanceLocator()
         {
             this.Main = new MainViewModel();
