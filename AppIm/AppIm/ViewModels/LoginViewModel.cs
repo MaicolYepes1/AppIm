@@ -2,17 +2,14 @@
 {
     using AppIm.Views;
     using GalaSoft.MvvmLight.Command;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Text;
     using System.Windows.Input;
     using Xamarin.Forms;
     using Services;
-    using AppIm.ViewModels;
+    using ViewModels;
 
     public class LoginViewModel : BaseViewModel
     {
+
         #region Atributos
         private string usuario;
         private string contraseña;
@@ -22,7 +19,7 @@
         #endregion
 
         #region Servicios
-        //private WebService webService;
+        DialogService dialogService;
         #endregion
 
         #region Propiedades
@@ -77,17 +74,19 @@
             }
         }
         #endregion
-        
+
         #region Constructores
         public LoginViewModel()
         {
+
+            dialogService = new DialogService();
             this.IsRemembered = true;
             this.IsEnabled = true;
 
             ;
         }
         #endregion
-         
+
         #region Comandos
         public ICommand LoginCommand
         {
@@ -98,19 +97,15 @@
 
         }
 
-        private async void Login()
+        async void Login()
         {
             if (string.IsNullOrEmpty(this.Usuario))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     "Error",
-                    "Debes ingresar nombre de usuario",
-                    "Aceptar");
-                     return;
+                    "Debes ingresar nombre de usuario");
+                return;
             }
-
-            this.IsRunning = false;
-            this.IsEnabled = true;
 
             if (string.IsNullOrEmpty(this.Contraseña))
             {
@@ -118,19 +113,33 @@
                     "Error",
                     "Debes ingresar una contraseña",
                     "Aceptar");
-                     this.Contraseña = string.Empty;
-                     return;
+                this.Contraseña = string.Empty;
+                return;
             }
+
+            var connection = await dialogService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await dialogService.ShowMessage(
+                    "Error",
+                    connection.Message);
+            }
+
+            this.IsRunning = true;
+            this.IsEnabled = false;
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.MenuPag = new MenuViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(
+                new MenuPage());
+
+            Usuario = null;
+            Contraseña = null;
+
             this.IsRunning = false;
             this.IsEnabled = true;
-
-            this.Usuario = string.Empty;
-            this.Contraseña = string.Empty;
-
-            MainViewModel.GetInstance().Login = new LoginViewModel();
-            //await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
-            await Application.Current.MainPage.Navigation.PushAsync(new MasterView());
-            //MainPage = new MasterView();
         }
         #endregion
     }

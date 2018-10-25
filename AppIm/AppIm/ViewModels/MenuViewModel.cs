@@ -1,14 +1,9 @@
 ﻿namespace AppIm.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
+    using Services;
     using System.Collections.ObjectModel;
-    using System.Text;
-    using Xamarin.Forms;
     using Models;
-    using AppIm.Services;
-    using System.Windows.Input;
-    using GalaSoft.MvvmLight.Command;
+
 
     public class MenuViewModel : BaseViewModel
     {
@@ -18,7 +13,7 @@
         #endregion
 
         #region Servicios
-        //private WebService webService;
+        DialogService dialogService;
         #endregion
 
         #region Propiedades
@@ -51,33 +46,24 @@
         #region Constructores
         public MenuViewModel()
         {
-            //this.webService = new WebService();
-            //this.LoadOpcionesMenu();
+            dialogService = new DialogService();
         }
         #endregion
 
         #region Metodos
-        //private async void LoadOpcionesMenu()
-        //{
-        //    //this.IsRefreshing = true;
-        //    ////var connection = await this.webService.CheckConnection();
 
-        //    //if (!connection.IsSuccess)
-        //    //{
-        //    //    this.IsRefreshing = false;
-        //    //    await Application.Current.MainPage.DisplayAlert(
-        //    //        "Error",
-        //    //        connection.Message,
-        //    //        "Aceptar");
-        //    //    await Application.Current.MainPage.Navigation.PopAsync();
-        //    //    return;
-        //    //}
+        async void MenuPage()
+        {
+            var connection = await dialogService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                await dialogService.ShowMessage(
+                    "Error",
+                    connection.Message);
+                return;
+            }
+        }
 
-
-        //    this.IsRefreshing = false;
-
-
-        //}
 
         #endregion
 

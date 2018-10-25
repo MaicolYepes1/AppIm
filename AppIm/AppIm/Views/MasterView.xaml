@@ -4,8 +4,8 @@
              x:Class="AppIm.Views.MasterView"
              xmlns:pages="clr-namespace:AppIm.Views"      
              BackgroundColor="{StaticResource FontColor}"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}">
-    <!--Title="Master">-->
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Master">
     <MasterDetailPage.Master>
         <pages:MenuView/>
     </MasterDetailPage.Master>

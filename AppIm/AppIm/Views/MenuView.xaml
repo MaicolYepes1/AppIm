@@ -13,13 +13,15 @@
                     TextColor="{StaticResource BackgroundColor}">
             </Label>
             <ListView BackgroundColor="{StaticResource FontColor}"
-                      ItemAppearing="{Binding MyMenu}"
-                      HasUnevenRows="True"
-                      SeparatorVisibility="None">
+                      ItemsSource="{Binding MyMenu}"
+                      HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateComand}"/>
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>

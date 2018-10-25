@@ -1,16 +1,20 @@
 ﻿namespace AppIm.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
     using Models;
-    using System.Net.Http;
-    using System.Net.Http.Headers;
     using Plugin.Connectivity;
+    using Xamarin.Forms;
 
-    public class WebService
+    public class DialogService
     {
+        public async Task ShowMessage(string title, string message)
+        {
+            await Application.Current.MainPage.DisplayAlert(
+                title,
+                message,
+                "Aceptar"); 
+        }
+
         public async Task<Responds> CheckConnection()
         {
             if (!CrossConnectivity.Current.IsConnected)

@@ -5,22 +5,15 @@
              BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Opciones">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            BindingContext="{Binding MenuView}"
+            Icon="ingreso.png"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Orientation="Horizontal">
-                <ListView BindingContext="{Binding IsRefressing}">
-                    <ListView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Inteligencia de Aduana</x:String>
-                            <x:String>Inteligencia Empresa</x:String>
-                            <x:String>Top Importaciones</x:String>
-                            <x:String>Top Exportaciones</x:String>
-                            <x:String>Oportunidades</x:String>
-                            <x:String>Licitaciones</x:String>
-                        </x:Array>
-                    </ListView.ItemsSource>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+        <StackLayout 
+            Padding="5"
+            BindingContext="{Binding Menu}">
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

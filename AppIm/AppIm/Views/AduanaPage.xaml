@@ -2,13 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.AduanaPage"
+             BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, {Binding Locator}}"
              Title="Inteligencia de Aduana">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Inteligencia De Aduana"
                 VerticalOptions="Center"/>
-            <Label Text="reporte actualizado que contiene actuales
+            <Label 
+                TextColor="{StaticResource FontColor}"
+                Text="reporte actualizado que contiene actuales
                 clientes de la Sia que se está citando bien sea 
                 por el nit o la razón social, 
                 arroja en gráficas la evolución de dicha aduana. 

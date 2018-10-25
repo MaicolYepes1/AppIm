@@ -5,7 +5,6 @@
              BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Login">
-
     <ContentPage.Content >
         <ScrollView 
             BindingContext="{Binding Login}">

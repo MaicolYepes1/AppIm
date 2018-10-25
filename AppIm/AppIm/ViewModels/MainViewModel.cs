@@ -16,6 +16,7 @@
             set;
         }
         #endregion
+
         #region ViewModels
 
         public LoginViewModel Login
@@ -23,11 +24,12 @@
             get;
             set;
         }
-        //public MenuViewModel MenuP
-        //{
-        //    get;
-        //    set;
-        //}
+
+        public MenuViewModel MenuPag
+        {
+            set;
+            get;
+        }
         #endregion
 
         #region Constructores
@@ -38,6 +40,7 @@
             this.Login = new LoginViewModel();
             loadMenu();
         }
+        #endregion
 
         #region Metodos
         private void loadMenu()
@@ -47,52 +50,46 @@
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "AduanaPage",
+                pageName = "AduanaPage.xaml",
                 Title = "Inteligencia Aduana"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "EmpresaPage",
+                pageName = "EmpresaPage.xaml",
                 Title = "Inteligencia Empresa"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "ImportacionesPage",
+                pageName = "ImportacionesPage.xaml",
                 Title = "Top Importaciones"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "ExportacionesPage",
+                pageName = "ExportacionesPage.xaml",
                 Title = "Top Exportaciones"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "OportunidadesPage",
+                pageName = "OportunidadesPage.xaml",
                 Title = "Oportunidades"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "Logo3.png",
-                PageName = "LicitacionesPage",
+                pageName = "LicitacionesPage.xaml",
                 Title = "Licitaciones"
             });
             MyMenu.Add(new Menu
             {
                 Icon = "exit.png",
-                PageName = "LoginPage",
+                pageName = "LoginPage.xaml",
                 Title = "Cerrar Cesión"
             });
         }
-        #endregion
-
-        //public MainViewModel()
-        //{
-
-        //    this.LoadOpcionesMenu(),
         #endregion
 
         #region Singleton
