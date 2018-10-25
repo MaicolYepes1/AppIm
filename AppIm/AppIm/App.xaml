@@ -7,7 +7,18 @@
     <Application.Resources>
         <!-- Diccionario de recursos de la aplicación-->
         <ResourceDictionary>
+            <!-- Locator -->
             <infra:InstanceLocator x:Key="Locator"/>
+            
+            <!-- Colores -->
+            <Color x:Key="MainColor">#7AC3CF</Color>
+            <Color x:Key="FontColor">#126E6D</Color>
+            <Color x:Key="AccentColor2">#7AB7CF</Color>
+            <Color x:Key="AccentColor1">#879EB0</Color>
+            <Color x:Key="BackgroundColor">#DEECFF</Color>
+            
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

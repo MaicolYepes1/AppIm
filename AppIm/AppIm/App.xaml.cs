@@ -9,12 +9,18 @@ namespace AppIm
 
     public partial class App : Application
     {
+        public static NavigationPage Navigator
+        {
+            get;
+            internal set;
+        }
         #region Constructors
         public App()
         {
             InitializeComponent();
 
-            this.MainPage = new NavigationPage(new LoginPage());
+            //this.MainPage = new NavigationPage(new LoginPage());
+            MainPage = new MasterView();
         }
         #endregion
 

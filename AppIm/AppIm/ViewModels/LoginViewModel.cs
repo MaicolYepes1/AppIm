@@ -127,9 +127,10 @@
             this.Usuario = string.Empty;
             this.Contraseña = string.Empty;
 
-            MainViewModel.GetInstance().MenuP = new MenuViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
-
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            //await Application.Current.MainPage.Navigation.PushAsync(new MenuPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new MasterView());
+            //MainPage = new MasterView();
         }
         #endregion
     }

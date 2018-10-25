@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppIm.Views.MasterView"
+             xmlns:pages="clr-namespace:AppIm.Views"      
+             BackgroundColor="{StaticResource FontColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <!--Title="Master">-->
+    <MasterDetailPage.Master>
+        <pages:MenuView/>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage 
+            BarTextColor="{Binding FontColor}"
+            BarBackgroundColor="{Binding MainColor}"
+            x:Name="Navigator">
+            <x:Arguments>
+                <pages:MenuPage/>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.LoginPage"
-             BackgroundColor="White"
+             BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Login">
 
@@ -23,7 +23,7 @@
                            Text="Usuario :"
                            Grid.Row="0" 
                            Grid.Column="0"
-                           TextColor="Black"></Label>
+                           TextColor="{StaticResource FontColor}"></Label>
                     <Entry Placeholder="Usuario"
                            TextColor="Black"
                            PlaceholderColor="Gray"
@@ -31,7 +31,7 @@
                            Grid.Column="1"
                            Text="{Binding Usuario, Mode=TwoWay}"></Entry>
                     <Label VerticalOptions="Center"
-                           TextColor="Black"
+                           TextColor="{StaticResource FontColor}"
                            Text="Contraseña :" 
                            Grid.Row="1" 
                            Grid.Column="0" ></Label>
@@ -46,7 +46,7 @@
                 <StackLayout Margin="10,0"
                              Orientation="Horizontal">
                     <Label VerticalOptions="Center"
-                           TextColor="Black"
+                           TextColor="{StaticResource FontColor}"
                            Text="Recordarme en esté dispositivo :"
                            HorizontalOptions="StartAndExpand"></Label>
                     <Switch 
@@ -59,9 +59,9 @@
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Ingresar" 
-                        TextColor="Black"
+                        TextColor="{StaticResource AccentColor2}"
                         BorderRadius="23" 
-                        BackgroundColor="#A9E8DC" 
+                        BackgroundColor="{StaticResource AccentColor1}" 
                         HeightRequest="46"
                         Command="{Binding LoginCommand}"/>
             </StackLayout>
