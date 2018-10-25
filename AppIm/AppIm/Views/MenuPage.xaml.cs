@@ -15,6 +15,7 @@
         public MenuPage()
         {
             InitializeComponent();
+            
         }
     }
 }
