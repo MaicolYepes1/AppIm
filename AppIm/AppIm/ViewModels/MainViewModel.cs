@@ -1,35 +1,36 @@
 ﻿namespace AppIm.ViewModels
 {
-    using AppIm.Models;
-    using System;
-    using System.Collections.Generic;
+    using Models;
+    using ViewModels;
     using System.Collections.ObjectModel;
-    using System.Text;
-
-    public class MainViewModel : BaseViewModel
+    
+    public class MainViewModel 
     {
 
         #region Propiedades
-        public ObservableCollection<Menu> MyMenu
-        {
-            get;
-            set;
-        }
-        #endregion
-
-        #region ViewModels
-
         public LoginViewModel Login
         {
             get;
             set;
         }
 
-        public MenuViewModel MenuPag
+        public OpcionesViewModel Opciones
         {
-            set;
             get;
+            set;
         }
+
+        public ObservableCollection<Menu> MyMenu
+        {
+            get;
+            set;
+        }
+
+        //public MenuViewModel MenuPag
+        //{
+        //    set;
+        //    get;
+        //}
         #endregion
 
         #region Constructores
@@ -37,63 +38,64 @@
         {
             instance = this;
 
-            this.Login = new LoginViewModel();
-            loadMenu();
+            Login = new LoginViewModel();
+            LoadMenu();
         }
         #endregion
 
         #region Metodos
-        private void loadMenu()
+        private void LoadMenu()
         {
-            MyMenu = new ObservableCollection<Menu>();
-
-            MyMenu.Add(new Menu
+            MyMenu = new ObservableCollection<Menu>
             {
-                Icon = "Logo3.png",
-                pageName = "AduanaPage.xaml",
-                Title = "Inteligencia Aduana"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "Logo3.png",
-                pageName = "EmpresaPage.xaml",
-                Title = "Inteligencia Empresa"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "Logo3.png",
-                pageName = "ImportacionesPage.xaml",
-                Title = "Top Importaciones"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "Logo3.png",
-                pageName = "ExportacionesPage.xaml",
-                Title = "Top Exportaciones"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "Logo3.png",
-                pageName = "OportunidadesPage.xaml",
-                Title = "Oportunidades"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "Logo3.png",
-                pageName = "LicitacionesPage.xaml",
-                Title = "Licitaciones"
-            });
-            MyMenu.Add(new Menu
-            {
-                Icon = "exit.png",
-                pageName = "LoginPage.xaml",
-                Title = "Cerrar Cesión"
-            });
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "AduanaPage",
+                    Title = "Inteligencia Aduana"
+                },
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "EmpresaPage",
+                    Title = "Inteligencia Empresa"
+                },
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "ImportacionesPage",
+                    Title = "Top Importaciones"
+                },
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "ExportacionesPage",
+                    Title = "Top Exportaciones"
+                },
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "OportunidadesPage",
+                    Title = "Oportunidades"
+                },
+                new Menu
+                {
+                    Icon = "Logo3.png",
+                    PageName = "LicitacionesPage",
+                    Title = "Licitaciones"
+                },
+                new Menu
+                {
+                    Icon = "exit.png",
+                    PageName = "LoginPage",
+                    Title = "Cerrar Cesion"
+                }
+            };
         }
         #endregion
 
         #region Singleton
-        private static MainViewModel instance;
+        static MainViewModel instance;
 
         public static MainViewModel GetInstance()
         {

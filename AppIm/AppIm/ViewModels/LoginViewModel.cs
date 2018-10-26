@@ -1,84 +1,141 @@
 ﻿namespace AppIm.ViewModels
 {
-    using AppIm.Views;
     using GalaSoft.MvvmLight.Command;
     using System.Windows.Input;
-    using Xamarin.Forms;
     using Services;
-    using ViewModels;
+    using System.ComponentModel;
+    using Xamarin.Forms;
 
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : INotifyPropertyChanged
     {
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        //protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
+
+        //protected void SetValue<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
+        //{
+        //    if (EqualityComparer<T>.Default.Equals(backingField, value))
+        //    {
+        //        return;
+        //    }
+        //    backingField = value;
+        //    OnPropertyChanged(propertyName);
+        //}
+
+        #region Eventos
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
 
         #region Atributos
-        private string usuario;
-        private string contraseña;
-        private bool isRunning;
-        private bool isEnabled;
+        string usuario;
+        string contraseña;
+        bool isRunning;
+        bool isEnabled;
+        bool isRemembered;
 
         #endregion
 
         #region Servicios
         DialogService dialogService;
+        NavigationService navigationService;
         #endregion
 
         #region Propiedades
-        public bool IsEnabled
-        {
-            get
-            {
-                return this.isEnabled;
-            }
-            set
-            {
-                SetValue(ref isEnabled, value);
-            }
-        }
-
         public string Usuario
         {
             get
             {
-                return this.usuario;
+                return usuario;
             }
             set
             {
-                SetValue(ref usuario, value);
+                if (usuario != value)
+                {
+                    usuario = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Usuario)));
+                }
             }
         }
         public string Contraseña
         {
             get
             {
-                return this.contraseña;
+                return contraseña;
             }
             set
             {
-                SetValue(ref contraseña, value);
+                if (contraseña != value)
+                {
+                    contraseña = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Contraseña)));
+                }
             }
         }
-        public bool IsRemembered
+        public bool IsEnabled
         {
-            get;
-            set;
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                if (isEnabled != value)
+                {
+                    isEnabled = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(IsEnabled)));
+                }
+            }
         }
         public bool IsRunning
         {
             get
             {
-                return this.isRunning;
+                return isRunning;
             }
             set
             {
-                SetValue(ref isRunning, value);
+                if (isRunning != value)
+                {
+                    isRunning = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(IsRunning)));
+                }
             }
         }
+        public bool IsRemembered
+        {
+            get
+            {
+                return isRemembered;
+            }
+            set
+            {
+                if (isRemembered != value)
+                {
+                    isRemembered = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(IsRemembered)));
+                }
+            }
+        }
+
         #endregion
 
         #region Constructores
         public LoginViewModel()
         {
-
+            navigationService = new NavigationService();
             dialogService = new DialogService();
             this.IsRemembered = true;
             this.IsEnabled = true;
@@ -109,37 +166,39 @@
 
             if (string.IsNullOrEmpty(this.Contraseña))
             {
-                await Application.Current.MainPage.DisplayAlert(
+                await dialogService.ShowMessage(
                     "Error",
-                    "Debes ingresar una contraseña",
-                    "Aceptar");
-                this.Contraseña = string.Empty;
+                    "Debes ingresar nombre de contraseña");
+                Contraseña = string.Empty;
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
 
             var connection = await dialogService.CheckConnection();
             if (!connection.IsSuccess)
             {
+                Usuario = null;
+                Contraseña = null;
                 IsRunning = false;
                 IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     connection.Message);
+                return;
             }
-
-            this.IsRunning = true;
-            this.IsEnabled = false;
-
+            
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.MenuPag = new MenuViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(
-                new MenuPage());
+            mainViewModel.Opciones = new OpcionesViewModel();
+             navigationService.SetMainPage("OpcionesView");
+           
 
             Usuario = null;
             Contraseña = null;
 
-            this.IsRunning = false;
-            this.IsEnabled = true;
+            IsRunning = false;
+            IsEnabled = true;
         }
         #endregion
     }

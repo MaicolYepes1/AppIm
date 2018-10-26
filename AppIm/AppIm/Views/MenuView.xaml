@@ -14,14 +14,15 @@
             </Label>
             <ListView BackgroundColor="{StaticResource FontColor}"
                       ItemsSource="{Binding MyMenu}"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <Grid.GestureRecognizers>
+                                <!--<Grid.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding NavigateComand}"/>
-                                </Grid.GestureRecognizers>
+                                </Grid.GestureRecognizers>-->
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -34,7 +35,8 @@
                                 <Label Grid.Column="1"
                                        Text="{Binding Title}"
                                        TextColor="{StaticResource BackgroundColor}"
-                                       VerticalOptions="Center">
+                                       VerticalOptions="Center"
+                                       >
                                 </Label>
                             </Grid>
                         </ViewCell>

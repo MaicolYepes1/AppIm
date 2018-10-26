@@ -10,12 +10,18 @@
             get;
             internal set;
         }
+        public static MasterView Master
+        {
+            get;
+            internal set;
+        }
         #region Constructors
         public App()
         {
             InitializeComponent();
 
             this.MainPage = new NavigationPage(new LoginPage());
+
         }
         #endregion
 
