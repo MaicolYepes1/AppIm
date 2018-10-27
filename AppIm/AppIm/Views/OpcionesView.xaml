@@ -10,10 +10,30 @@
         <ToolbarItem
             Icon="ingreso.png"/>
     </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout 
-            Padding="5"
+
+    <ScrollView>
+        <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
             BindingContext="{Binding Opciones}">
+            <StackLayout >
+                <Image  
+                    WidthRequest="200"
+                    Source="LogoIM1.png"></Image>
+            </StackLayout>
+            <StackLayout Padding="5,10">
+                <Label 
+                FontSize="Large"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                Text="¿POR QUE ELEJIRNOS?"></Label>
+            </StackLayout>
+            <Label 
+                FontSize="Large"
+                TextColor="{StaticResource FontColor}"
+                Text="Somos una empresa con más de 14 años en el mercado, que nos han permitido convertirnos en una empresa líder en la inteligencia de mercado para el comercio exterior.
+                
+                Siempre del lado de nuestros clientes, buscamos mejoras continuas, para siempre estar a la altura del mercado."></Label>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

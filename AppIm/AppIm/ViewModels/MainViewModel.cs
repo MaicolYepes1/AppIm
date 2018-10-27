@@ -3,8 +3,8 @@
     using Models;
     using ViewModels;
     using System.Collections.ObjectModel;
-    
-    public class MainViewModel 
+
+    public class MainViewModel
     {
 
         #region Propiedades
@@ -25,12 +25,37 @@
             get;
             set;
         }
+        public AduanaViewModel Aduana
+        {
+            get;
+            set;
+        }
+        public EmpresaViewModel Empresa
+        {
+            get;
+            set;
+        }
+        public ExportacionesViewModel Exportaciones
+        {
+            get;
+            set;
+        }
+        public ImportacionesViewModel Importaciones
+        {
+            get;
+            set;
+        }
+        public OportunidadesViewModel Oportunidades
+        {
+            get;
+            set;
+        }
+        public LicitacionesViewModel Licitaciones
+        {
+            get;
+            set;
+        }
 
-        //public MenuViewModel MenuPag
-        //{
-        //    set;
-        //    get;
-        //}
         #endregion
 
         #region Constructores
@@ -40,6 +65,7 @@
 
             Login = new LoginViewModel();
             LoadMenu();
+
         }
         #endregion
 

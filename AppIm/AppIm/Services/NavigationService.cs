@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Views;
     using Xamarin.Forms;
-    
+
 
     public class NavigationService
     {
@@ -19,27 +19,36 @@
                     break;
             }
         }
-        public async Task NavigateOnMaster(string pageName)
+        public async Task NavigateOnMaster(string PageName)
         {
             App.Master.IsPresented = false;
-            switch (pageName)
+            switch (PageName)
             {
-                case "MenuPage":
+                case "AduanaPage":
                     await App.Navigator.PushAsync(
-                   new MenuView());
+                   new AduanaPage());
                     break;
+                case "EmpresaPage":
+                    await App.Navigator.PushAsync(
+                   new EmpresaPage());
+                    break;
+                case "ExportacionesPage":
+                    await App.Navigator.PushAsync(
+                   new ExportacionesPage());
+                    break;
+                case "ImportacionesPage":
+                    await App.Navigator.PushAsync(
+                   new ImportacionesPage());
+                    break;
+                case "LicitacionesPage":
+                    await App.Navigator.PushAsync(
+                   new LicitacionesPage());
+                    break;
+                case "OportunidadesPage":
+                    await App.Navigator.PushAsync(
+                   new OportunidadesPage());
+                    break;    
             }
         }
-        //public async Task NavigateOnLogin(string pageName)
-        //{
-        //    switch (pageName)
-        //    {
-
-        //        case "OpcionesView":
-        //            await App.Navigator.PushAsync(
-        //           new OpcionesView());
-        //            break;
-        //    }
-        //}
     }
 }

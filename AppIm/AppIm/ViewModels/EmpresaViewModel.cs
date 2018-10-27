@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.ViewModels
-{
-    class EmpresaViewModel
+﻿namespace AppIm.ViewModels
+{ 
+   public class EmpresaViewModel
     {
     }
 }

@@ -6,10 +6,29 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Top Exportaciones">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
+            BindingContext="{Binding Exportaciones}">
+                <StackLayout >
+                    <Image  
+                    WidthRequest="200"
+                    Source="LogoIM1.png"></Image>
+                </StackLayout>
+                <StackLayout Padding="5,10">
+                    <Label 
+                    FontSize="Large"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    Text="RANKING DE EXPORTACIONES"></Label>
+                </StackLayout>
+                <Label 
+                FontSize="Large"
+                TextColor="{StaticResource FontColor}"
+                Text="Encontraremos el top de exportadores, generando un reporte de acuerdo al rango de fechas deseado. Esta información podrá ser exportada a excel, trayendo información como puesto en el ranking, razón social, nit, cantidad de declaraciones, valoR FOB USD, valor FOB COP, peso neto y peso bruto.">
+                </Label>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

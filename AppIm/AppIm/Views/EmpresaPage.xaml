@@ -6,10 +6,28 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Inteligencia Empresa">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
+            BindingContext="{Binding Empresa}">
+                <StackLayout >
+                    <Image  
+                    WidthRequest="150"
+                    Source="LogoIM1.png"></Image>
+                </StackLayout>
+                <StackLayout Padding="5,10">
+                    <Label 
+                    FontSize="Large"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                Text="INTELIGENCIA EMPRESA"></Label>
+                </StackLayout>
+                <Label 
+                FontSize="Large"
+                TextColor="{StaticResource FontColor}"
+                Text="Esté informe básicamente consiste en verificar cada uno de los clientes que se tienen actualmente y mirar con que otra agencia de aduanas está trabajando, todo esto es con la idea de realizar la fidelización de cada uno de ellos. El sistema calcula los porcentajes que este ítem nos arroja con la información de número de declaraciones, cantidad de operaciones, valor CIF, valor CIF COP, peso neto, peso bruto y la participación que se tiene con ese cliente, esta información puede ser enviada al correo electrónico y después abrirlo en excel generando así un reporte."/>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

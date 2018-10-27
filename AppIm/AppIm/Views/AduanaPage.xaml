@@ -6,20 +6,29 @@
              BindingContext="{Binding Main, {Binding Locator}}"
              Title="Inteligencia de Aduana">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Inteligencia De Aduana"
-                VerticalOptions="Center"/>
-            <Label 
+        <ScrollView>
+            <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
+            BindingContext="{Binding Aduana}">
+                <StackLayout >
+                    <Image  
+                    WidthRequest="200"
+                    Source="LogoIM1.png"></Image>
+                </StackLayout>
+                <StackLayout Padding="5,10">
+                    <Label 
+                    FontSize="Large"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                Text="INTELIGENCIA ADUANA"></Label>
+
+                </StackLayout>
+                <Label 
+                FontSize="Large"
                 TextColor="{StaticResource FontColor}"
-                Text="reporte actualizado que contiene actuales
-                clientes de la Sia que se está citando bien sea 
-                por el nit o la razón social, 
-                arroja en gráficas la evolución de dicha aduana. 
-                El sistema calcula los valores de número de declaraciones,
-                cantidad de operaciones, 
-                valor CIF, valor CIF COP, peso neto, 
-                peso bruto y la participación que cada empresa tiene para la Sia,
-                este reporte puede ser enviado al correo o ser exportado a excel."></Label>
-        </StackLayout>
+                Text="Reporte actualizado que contiene actuales clientes de la Sia que se está citando bien sea por el nit o la razón social, arroja en gráficas la evolución de dicha aduana. El sistema calcula los valores de número de declaraciones, cantidad de operaciones, valor CIF, valor CIF COP, peso neto, peso bruto y la participación que cada empresa tiene para la Sia, este reporte puede ser enviado al correo o ser exportado a excel."></Label>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

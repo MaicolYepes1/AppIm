@@ -26,12 +26,12 @@
                 };
             }
             var isReachable = await CrossConnectivity.Current.IsRemoteReachable(
-           "google.com");
+           "www.google.com");
             if (!isReachable)
             {
                 return new Responds
                 {
-                    IsSuccess = false,
+                    IsSuccess = true,
                     Message = "Valide su conexión a internet.",
                 };
             }

@@ -4,27 +4,10 @@
     using System.Windows.Input;
     using Services;
     using System.ComponentModel;
-    using Xamarin.Forms;
-
+    
     public class LoginViewModel : INotifyPropertyChanged
     {
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
-
-        //protected void SetValue<T>(ref T backingField, T value, [CallerMemberName] string propertyName = null)
-        //{
-        //    if (EqualityComparer<T>.Default.Equals(backingField, value))
-        //    {
-        //        return;
-        //    }
-        //    backingField = value;
-        //    OnPropertyChanged(propertyName);
-        //}
-
+        
         #region Eventos
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
@@ -137,8 +120,8 @@
         {
             navigationService = new NavigationService();
             dialogService = new DialogService();
-            this.IsRemembered = true;
-            this.IsEnabled = true;
+            IsRemembered = true;
+            IsEnabled = true;
 
             ;
         }
@@ -168,7 +151,7 @@
             {
                 await dialogService.ShowMessage(
                     "Error",
-                    "Debes ingresar nombre de contraseña");
+                    "Debes ingresar una contraseña");
                 Contraseña = string.Empty;
                 return;
             }
@@ -188,10 +171,10 @@
                     connection.Message);
                 return;
             }
-            
+
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Opciones = new OpcionesViewModel();
-             navigationService.SetMainPage("OpcionesView");
+            navigationService.SetMainPage("MasterView");
            
 
             Usuario = null;

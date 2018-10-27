@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
-    class ImportacionesViewModel
+   public class ImportacionesViewModel
     {
     }
 }

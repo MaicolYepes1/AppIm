@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
-    class AduanaViewModel
+
+    public class AduanaViewModel
     {
     }
 }

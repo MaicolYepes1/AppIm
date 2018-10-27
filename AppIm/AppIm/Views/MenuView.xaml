@@ -20,9 +20,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <!--<Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding NavigateComand}"/>
-                                </Grid.GestureRecognizers>-->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigateCommand}"/>
+                                </Grid.GestureRecognizers>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>

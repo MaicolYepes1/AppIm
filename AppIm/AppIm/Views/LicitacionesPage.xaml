@@ -6,10 +6,28 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Licitaciones">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
+            BindingContext="{Binding Licitaciones}">
+                <StackLayout >
+                    <Image  
+                    WidthRequest="200"
+                    Source="LogoIM1.png"></Image>
+                </StackLayout>
+                <StackLayout Padding="5,10">
+                    <Label 
+                FontSize="Large"
+                TextColor="Black"
+                HorizontalOptions="Center"
+                Text="LICITACIONES"></Label>
+                </StackLayout>
+                <Label 
+                FontSize="Large"
+                TextColor="{StaticResource FontColor}"
+                Text="Con la ayuda de nuestro departamento de investigaciones y telemercadeo esta información es actualizada diariamente, en donde la empresa contactada proporciona la fecha en la cual realizan la licitación. Encontraremos en este ítem razón social, fecha de apertura de la licitación, contacto, cantidad de operaciones tanto en impo como en expo, ciudad, teléfono y dirección. El número de operaciones es calculado con base al último año."></Label>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
