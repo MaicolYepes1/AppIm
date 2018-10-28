@@ -156,7 +156,6 @@
                 return;
             }
 
-            IsRunning = true;
             IsEnabled = false;
 
             var connection = await dialogService.CheckConnection();

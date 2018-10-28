@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://179.50.16.169/IMWS/IM_APP.ASMX?disco" filename="IM_APP.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://179.50.16.169/IMWS/IM_APP.ASMX?wsdl" filename="IM_APP.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

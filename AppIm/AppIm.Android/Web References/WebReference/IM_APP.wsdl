@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="InteligenciaAduanas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cNit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dFechaInicial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dFechaFinal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cTipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InteligenciaAduanasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InteligenciaAduanasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InteligenciaEmpresas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cNit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dFechaInicial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dFechaFinal" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cTipo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InteligenciaEmpresasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InteligenciaEmpresasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Usuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pass" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InteligenciaAduanasSoapIn">
+    <wsdl:part name="parameters" element="tns:InteligenciaAduanas" />
+  </wsdl:message>
+  <wsdl:message name="InteligenciaAduanasSoapOut">
+    <wsdl:part name="parameters" element="tns:InteligenciaAduanasResponse" />
+  </wsdl:message>
+  <wsdl:message name="InteligenciaEmpresasSoapIn">
+    <wsdl:part name="parameters" element="tns:InteligenciaEmpresas" />
+  </wsdl:message>
+  <wsdl:message name="InteligenciaEmpresasSoapOut">
+    <wsdl:part name="parameters" element="tns:InteligenciaEmpresasResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IM_APPSoap">
+    <wsdl:operation name="InteligenciaAduanas">
+      <wsdl:input message="tns:InteligenciaAduanasSoapIn" />
+      <wsdl:output message="tns:InteligenciaAduanasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InteligenciaEmpresas">
+      <wsdl:input message="tns:InteligenciaEmpresasSoapIn" />
+      <wsdl:output message="tns:InteligenciaEmpresasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="IM_APPSoap" type="tns:IM_APPSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InteligenciaAduanas">
+      <soap:operation soapAction="http://tempuri.org/InteligenciaAduanas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InteligenciaEmpresas">
+      <soap:operation soapAction="http://tempuri.org/InteligenciaEmpresas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="IM_APPSoap12" type="tns:IM_APPSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="InteligenciaAduanas">
+      <soap12:operation soapAction="http://tempuri.org/InteligenciaAduanas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InteligenciaEmpresas">
+      <soap12:operation soapAction="http://tempuri.org/InteligenciaEmpresas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IM_APP">
+    <wsdl:port name="IM_APPSoap" binding="tns:IM_APPSoap">
+      <soap:address location="http://179.50.16.169/IMWS/IM_APP.ASMX" />
+    </wsdl:port>
+    <wsdl:port name="IM_APPSoap12" binding="tns:IM_APPSoap12">
+      <soap12:address location="http://179.50.16.169/IMWS/IM_APP.ASMX" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
