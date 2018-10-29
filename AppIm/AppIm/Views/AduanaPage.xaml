@@ -7,27 +7,87 @@
              Title="Inteligencia de Aduana">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout
-            HorizontalOptions="Center"
-            Padding="20"
-            BindingContext="{Binding Aduana}">
-                <StackLayout >
-                    <Image  
-                    WidthRequest="200"
-                    Source="LogoIM1.png"></Image>
-                </StackLayout>
-                <StackLayout Padding="5,10">
-                    <Label 
-                    FontSize="Large"
-                TextColor="Black"
-                HorizontalOptions="Center"
-                Text="INTELIGENCIA ADUANA"></Label>
-
-                </StackLayout>
-                <Label 
-                FontSize="Large"
-                TextColor="{StaticResource FontColor}"
-                Text="Reporte actualizado que contiene actuales clientes de la Sia que se está citando bien sea por el nit o la razón social, arroja en gráficas la evolución de dicha aduana. El sistema calcula los valores de número de declaraciones, cantidad de operaciones, valor CIF, valor CIF COP, peso neto, peso bruto y la participación que cada empresa tiene para la Sia, este reporte puede ser enviado al correo o ser exportado a excel."></Label>
+            <StackLayout 
+                BindingContext="{Binding Aduana}"
+                Padding="20.0">
+                <Label  VerticalOptions="Center" 
+                        Text="INTELIGENCIA ADUANAS"
+                        FontSize="Large"
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        TextColor="{StaticResource FontColor}">
+                </Label>
+                <Label></Label>
+                <Label></Label>
+                <Grid Margin="10,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" 
+                           Text="Nit :"
+                           Grid.Row="0" 
+                           Grid.Column="0"
+                           TextColor="{StaticResource FontColor}">
+                    </Label>
+                    <Entry Placeholder="nit"
+                           TextColor="Black"
+                           PlaceholderColor="Gray"
+                           Grid.Row="0" 
+                           Grid.Column="1">
+                    </Entry>
+                    <Label VerticalOptions="Center"
+                           TextColor="{StaticResource FontColor}"
+                           Text="Fecha Inicial :" 
+                           Grid.Row="1" 
+                           Grid.Column="0" >
+                    </Label>
+                    <DatePicker
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        MinimumDate="01/01/2000"
+                        MaximumDate="12/31/2020"
+                        Date="06/21/2018" />
+                    <Label VerticalOptions="Center" 
+                           Text="Fecha Final :"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="2" 
+                           Grid.Column="0"
+                           ></Label>
+                    <DatePicker
+                        Grid.Row="2" 
+                        Grid.Column="1"
+                        MinimumDate="01/01/2000"
+                        MaximumDate="12/31/2020"
+                        Date="06/21/2018" />
+                    <Label
+                           VerticalOptions="Center" 
+                           Text="Tipo:"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="3" 
+                           Grid.Column="0">
+                    </Label>
+                    <Picker 
+                        TextColor="{StaticResource FontColor}"
+                        Grid.Row="3" 
+                        Grid.Column="1">
+                        <Picker.Items>
+                            <x:String>IMPO</x:String>
+                            <x:String>EXPO</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Grid>
+                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        VerticalOptions="Center"
+                        Margin="100,0" 
+                        Text="Buscar" 
+                        TextColor="{StaticResource FontColor}"
+                        BorderRadius="23" 
+                        BackgroundColor="{StaticResource MainColor}" 
+                        HeightRequest="46">
+                </Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

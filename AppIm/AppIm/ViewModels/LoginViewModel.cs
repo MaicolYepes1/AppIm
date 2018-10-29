@@ -4,7 +4,14 @@
     using System.Windows.Input;
     using Services;
     using System.ComponentModel;
-    
+    using System.ServiceModel;
+    using System;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public class LoginViewModel : INotifyPropertyChanged
     {
         
@@ -139,6 +146,8 @@
 
         async void Login()
         {
+            Usuario = "carolinarosero";
+            Contraseña = "Coral2013";
             if (string.IsNullOrEmpty(this.Usuario))
             {
                 await dialogService.ShowMessage(
@@ -171,6 +180,8 @@
                 return;
             }
 
+
+            var oLogin = LoginUsuario(Usuario, Contraseña);
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Opciones = new OpcionesViewModel();
             navigationService.SetMainPage("MasterView");
@@ -183,5 +194,21 @@
             IsEnabled = true;
         }
         #endregion
+
+        public async Task<string> LoginUsuario(string usu, string pass)
+        {
+            var client = new HttpClient();
+            string usuar = string.Empty;
+            try
+            {
+                var response = await client.GetStringAsync("http://179.50.16.169/IMWS/IM_APP.ASMX/Login?Usuario=" + usu + "&Pass=" + pass);
+                usuar = JsonConvert.DeserializeObject<string>(response);
+            }
+            catch (Exception ex)
+            {
+                usuar = ex.Message;
+            }
+            return usuar;
+        }
     }
 }

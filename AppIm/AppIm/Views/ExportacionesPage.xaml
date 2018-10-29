@@ -11,23 +11,68 @@
             HorizontalOptions="Center"
             Padding="20"
             BindingContext="{Binding Exportaciones}">
-                <StackLayout >
-                    <Image  
-                    WidthRequest="200"
-                    Source="LogoIM1.png"></Image>
-                </StackLayout>
-                <StackLayout Padding="5,10">
-                    <Label 
-                    FontSize="Large"
-                    TextColor="Black"
-                    HorizontalOptions="Center"
-                    Text="RANKING DE EXPORTACIONES"></Label>
-                </StackLayout>
                 <Label 
-                FontSize="Large"
-                TextColor="{StaticResource FontColor}"
-                Text="Encontraremos el top de exportadores, generando un reporte de acuerdo al rango de fechas deseado. Esta información podrá ser exportada a excel, trayendo información como puesto en el ranking, razón social, nit, cantidad de declaraciones, valoR FOB USD, valor FOB COP, peso neto y peso bruto.">
-                </Label>
+                    TextColor="{StaticResource FontColor}"
+                    Text="RANKING DE EXPORTACIONES"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center"
+                           TextColor="{StaticResource FontColor}"
+                           Text="Fecha Inicial :" 
+                           Grid.Row="1" 
+                           Grid.Column="0" >
+                    </Label>
+                    <DatePicker
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        MinimumDate="01/01/2000"
+                        MaximumDate="12/31/2020"
+                        Date="06/21/2018" />
+                    <Label VerticalOptions="Center" 
+                           Text="Fecha Final :"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="2" 
+                           Grid.Column="0"
+                           ></Label>
+                    <DatePicker
+                        Grid.Row="2" 
+                        Grid.Column="1"
+                        MinimumDate="01/01/2000"
+                        MaximumDate="12/31/2020"
+                        Date="06/21/2018" />
+                    <Label
+                           VerticalOptions="Center" 
+                           Text="Tipo:"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="3" 
+                           Grid.Column="0">
+                    </Label>
+                    <Picker 
+                        TextColor="{StaticResource FontColor}"
+                        Grid.Row="3" 
+                        Grid.Column="1">
+                        <Picker.Items>
+                            <x:String>AGENCIA DE ADUANAS</x:String>
+                            <x:String>IMPORTADOR</x:String>
+                            <x:String>ADUANA</x:String>
+                            <x:String>PAIS EMBARQUE</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Grid>
+                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                </ActivityIndicator>
+                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        VerticalOptions="Center"
+                        Margin="100,0" 
+                        Text="Buscar" 
+                        TextColor="{StaticResource FontColor}"
+                        BorderRadius="23" 
+                        BackgroundColor="{StaticResource MainColor}" 
+                        HeightRequest="46">
+                </Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
