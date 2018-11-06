@@ -24,6 +24,10 @@
             App.Master.IsPresented = false;
             switch (PageName)
             {
+                case "AduanaView":
+                    await App.Navigator.PushAsync(
+                        new AduanaView());
+                    break;
                 case "AduanaPage":
                     await App.Navigator.PushAsync(
                    new AduanaPage());

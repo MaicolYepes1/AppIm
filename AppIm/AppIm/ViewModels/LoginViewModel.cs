@@ -5,20 +5,20 @@
     using Services;
     using System.ComponentModel;
     using System;
+    using System.Threading.Tasks;
     using Newtonsoft.Json;
     using System.Net.Http;
-    using System.Threading.Tasks;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
-        
+
         #region Eventos
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Atributos
         string usuario;
-        string contraseña;
+        string pass;
         bool isRunning;
         bool isEnabled;
         bool isRemembered;
@@ -48,20 +48,20 @@
                 }
             }
         }
-        public string Contraseña
+        public string Pass
         {
             get
             {
-                return contraseña;
+                return pass;
             }
             set
             {
-                if (contraseña != value)
+                if (pass != value)
                 {
-                    contraseña = value;
+                    pass = value;
                     PropertyChanged?.Invoke(
                         this,
-                        new PropertyChangedEventArgs(nameof(Contraseña)));
+                        new PropertyChangedEventArgs(nameof(Pass)));
                 }
             }
         }
@@ -143,8 +143,7 @@
 
         async void Login()
         {
-            Usuario = "carolinarosero";
-            Contraseña = "Coral2013";
+            IsRunning = true;
             if (string.IsNullOrEmpty(this.Usuario))
             {
                 await dialogService.ShowMessage(
@@ -153,59 +152,68 @@
                 return;
             }
 
-            if (string.IsNullOrEmpty(this.Contraseña))
+            if (string.IsNullOrEmpty(this.Pass))
             {
                 await dialogService.ShowMessage(
                     "Error",
                     "Debes ingresar una contraseña");
-                Contraseña = string.Empty;
+                Pass = string.Empty;
                 return;
             }
-
-            IsEnabled = false;
+            
+            IsEnabled = true;
 
             var connection = await dialogService.CheckConnection();
             if (!connection.IsSuccess)
             {
-                Usuario = null;
-                Contraseña = null;
-                IsRunning = false;
-                IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     connection.Message);
                 return;
             }
-
-
-            var oLogin = LoginUsuario(Usuario, Contraseña);
-            var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.Opciones = new OpcionesViewModel();
-            navigationService.SetMainPage("MasterView");
-           
-
-            Usuario = null;
-            Contraseña = null;
+            
+            var oLogin = LoginUsuario(Usuario, Pass);
+            if (!oLogin.Contains("Error"))
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.Opciones = new OpcionesViewModel();
+                navigationService.SetMainPage("MasterView");
+                IsRunning = true;
+            }
+            else
+            {
+                await dialogService.ShowMessage(
+                    "Error",
+                    "Usuario o Contraseña Incorrectos");
+            }
 
             IsRunning = false;
+            Usuario = null;
+            Pass = null;
             IsEnabled = true;
+
         }
         #endregion
 
-        public async Task<string> LoginUsuario(string usu, string pass)
+        public string LoginUsuario(string usu, string pass)
         {
             var client = new HttpClient();
             string usuar = string.Empty;
             try
             {
-                var response = await client.GetStringAsync("http://179.50.16.169/IMWS/IM_APP.ASMX/Login?Usuario=" + usu + "&Pass=" + pass);
-                usuar = JsonConvert.DeserializeObject<string>(response);
+                var uri = new Uri("http://192.168.1.67/IM_Api/api/ImServicio/Login?Usuario=" + usu  + "&Pass=" + pass);
+                var response = client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = response.Content.ReadAsStringAsync().Result;
+                    usuar = JsonConvert.DeserializeObject<string>(data);
+                }
             }
             catch (Exception ex)
             {
                 usuar = ex.Message;
             }
-            return usuar;
+                return usuar;   
         }
     }
 }

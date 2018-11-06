@@ -34,13 +34,14 @@
                            Text="Contraseña :" 
                            Grid.Row="1" 
                            Grid.Column="0" ></Label>
-                    <Entry IsPassword="True"
+                    <Entry IsSpellCheckEnabled="True" 
+                           IsPassword="True"
                            TextColor="Black"
-                            PlaceholderColor="Gray"
+                           PlaceholderColor="Gray"
                            Placeholder="Contraseña"
                            Grid.Row="1"
                            Grid.Column="1"
-                           Text="{Binding Contraseña, Mode=TwoWay}"></Entry>
+                           Text="{Binding Pass, Mode=TwoWay}"></Entry>
                 </Grid>
                 <StackLayout Margin="10,0"
                              Orientation="Horizontal">
@@ -48,11 +49,13 @@
                            TextColor="{StaticResource FontColor}"
                            Text="Recordarme en esté dispositivo :"
                            HorizontalOptions="StartAndExpand"></Label>
-                    <Switch 
+                    <Switch OnColor="{StaticResource MainColor}"
                             IsToggled="{Binding IsRemembered, Mode=TwoWay}"
                             HorizontalOptions="End"></Switch>
                 </StackLayout>
-                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                <ActivityIndicator 
+                    Color="{StaticResource MainColor}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
                 <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"

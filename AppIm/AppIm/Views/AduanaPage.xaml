@@ -6,9 +6,9 @@
              BindingContext="{Binding Main, {Binding Locator}}"
              Title="Inteligencia de Aduana">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView
+            BindingContext="{Binding Aduana}">
             <StackLayout 
-                BindingContext="{Binding Aduana}"
                 Padding="20.0">
                 <Label  VerticalOptions="Center" 
                         Text="INTELIGENCIA ADUANAS"
@@ -34,7 +34,8 @@
                            TextColor="Black"
                            PlaceholderColor="Gray"
                            Grid.Row="0" 
-                           Grid.Column="1">
+                           Grid.Column="1"
+                           BindingContext="{Binding Nit}">
                     </Entry>
                     <Label VerticalOptions="Center"
                            TextColor="{StaticResource FontColor}"
@@ -45,9 +46,8 @@
                     <DatePicker
                         Grid.Row="1" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
-                        MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        x:Name="FechaInicial"
+                        BindingContext="{Binding FechaInicial}"/>
                     <Label VerticalOptions="Center" 
                            Text="Fecha Final :"
                            TextColor="{StaticResource FontColor}"
@@ -57,9 +57,8 @@
                     <DatePicker
                         Grid.Row="2" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
-                        MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        x:Name="FechaFinal"
+                        BindingContext="{Binding FechaFinal}"/>
                     <Label
                            VerticalOptions="Center" 
                            Text="Tipo:"
@@ -70,7 +69,8 @@
                     <Picker 
                         TextColor="{StaticResource FontColor}"
                         Grid.Row="3" 
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        BindingContext="{Binding Tipo}">
                         <Picker.Items>
                             <x:String>IMPO</x:String>
                             <x:String>EXPO</x:String>
@@ -86,7 +86,8 @@
                         TextColor="{StaticResource FontColor}"
                         BorderRadius="23" 
                         BackgroundColor="{StaticResource MainColor}" 
-                        HeightRequest="46">
+                        HeightRequest="46"
+                        Command="{Binding BuscarCommand}">
                 </Button>
             </StackLayout>
         </ScrollView>

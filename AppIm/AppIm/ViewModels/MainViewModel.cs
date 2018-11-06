@@ -1,7 +1,6 @@
 ﻿namespace AppIm.ViewModels
 {
     using Models;
-    using ViewModels;
     using System.Collections.ObjectModel;
 
     public class MainViewModel
@@ -51,6 +50,11 @@
             set;
         }
         public LicitacionesViewModel Licitaciones
+        {
+            get;
+            set;
+        }
+        public AduanaViewModelWS AduanaWs
         {
             get;
             set;

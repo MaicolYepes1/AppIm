@@ -1,10 +1,7 @@
-﻿using AppIm.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.Infrastructure
+﻿namespace AppIm.Infrastructure
 {
+    using AppIm.ViewModels;
+
     public class InstanceLocator
     {
 

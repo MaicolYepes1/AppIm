@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppIm.Android", "AppIm\AppI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppIm.iOS", "AppIm\AppIm.iOS\AppIm.iOS.csproj", "{1AD21806-EDB2-410F-A72B-DC6D77DB1E28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppIm", "AppIm\AppIm\AppIm.csproj", "{9B38073F-2FC1-4BF2-B162-0C9993E5CC46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppIm", "AppIm\AppIm\AppIm.csproj", "{9B38073F-2FC1-4BF2-B162-0C9993E5CC46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppIm.Views.AduanaView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+             x:Class="AppIm.Views.AduanaView"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, {Binding Locator}}"
+             Title="Inteligencia de Aduana">
+    <ContentPage.Content
+        BindingContext="{Binding AduanaWs}">
+        <ScrollView>
+            <ListView
+                ItemsSource="{Binding AduanaWs}">
+                
+            </ListView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
