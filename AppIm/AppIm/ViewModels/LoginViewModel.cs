@@ -5,7 +5,6 @@
     using Services;
     using System.ComponentModel;
     using System;
-    using System.Threading.Tasks;
     using Newtonsoft.Json;
     using System.Net.Http;
 
@@ -126,8 +125,6 @@
             dialogService = new DialogService();
             IsRemembered = true;
             IsEnabled = true;
-
-            ;
         }
         #endregion
 
@@ -201,7 +198,7 @@
             string usuar = string.Empty;
             try
             {
-                var uri = new Uri("http://192.168.1.67/IM_Api/api/ImServicio/Login?Usuario=" + usu  + "&Pass=" + pass);
+                var uri = new Uri("http://192.168.1.67/IM_Api/api/Login/Login?Usuario=" + usu  + "&Pass=" + pass);
                 var response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {

@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace AppIm.Views
+﻿namespace AppIm.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AduanaView : ContentPage
-	{
-		public AduanaView ()
-		{
-			InitializeComponent ();
-		}
-	}
+    using AppIm.Models;
+    using System.Collections.Generic;
+    using Xamarin.Forms;
+    public partial class AduanaView : ContentPage
+    {
+        public List<InteligenciaAgenciaAduanaViewModel> ListaAduana = new List<InteligenciaAgenciaAduanaViewModel>();
+        public AduanaView()
+        {
+            InitializeComponent();
+            LisAduan.ItemsSource = ListaAduana;
+        }
+        
+        public AduanaView(List<InteligenciaAgenciaAduanaViewModel> aduanas)
+        {
+            InitializeComponent();
+            ListaAduana = aduanas;
+            LisAduan.ItemsSource = ListaAduana;
+        }
+    }
 }

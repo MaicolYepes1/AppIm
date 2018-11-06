@@ -1,10 +1,10 @@
 ﻿namespace AppIm.Services
 {
+    using AppIm.Models;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Views;
     using Xamarin.Forms;
-
-
     public class NavigationService
     {
         public void SetMainPage(string pageName)
@@ -19,15 +19,22 @@
                     break;
             }
         }
+        public async Task NavigateOnAduana(string PageName, List<InteligenciaAgenciaAduanaViewModel> aduanas)
+        {
+            //App.Aduana.IsPresented = false;
+            switch (PageName)
+            {
+                case "AduanaView":
+                    await App.Navigator.PushAsync(
+                        new AduanaView(aduanas));
+                    break;
+            }
+        }
         public async Task NavigateOnMaster(string PageName)
         {
             App.Master.IsPresented = false;
             switch (PageName)
             {
-                case "AduanaView":
-                    await App.Navigator.PushAsync(
-                        new AduanaView());
-                    break;
                 case "AduanaPage":
                     await App.Navigator.PushAsync(
                    new AduanaPage());
@@ -51,7 +58,7 @@
                 case "OportunidadesPage":
                     await App.Navigator.PushAsync(
                    new OportunidadesPage());
-                    break;    
+                    break;
             }
         }
     }

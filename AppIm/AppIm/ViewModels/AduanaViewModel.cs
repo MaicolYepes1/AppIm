@@ -1,18 +1,22 @@
-﻿using AppIm.Services;
-using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
-using System;
-using System.ComponentModel;
-using System.Net.Http;
-using System.Windows.Input;
-
-namespace AppIm.ViewModels
+﻿namespace AppIm.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
+    using System.Windows.Input;
+    using Services;
+    using System.ComponentModel;
+    using System;
+    using Newtonsoft.Json;
+    using System.Net.Http;
+    using System.Collections.Generic;
+    using AppIm.Models;
+    using Xamarin.Forms;
+    using AppIm.Views;
 
     public class AduanaViewModel : INotifyPropertyChanged
     {
         #region Eventos
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<Xamarin.Forms.DateChangedEventArgs> DateSelected;
         #endregion
 
         #region Atributos
@@ -78,11 +82,15 @@ namespace AppIm.ViewModels
                     fechaFinal = value;
                     PropertyChanged?.Invoke(
                         this,
-                        new PropertyChangedEventArgs(nameof(FechaFinal)));
+                        new PropertyChangedEventArgs("FechaFinal"));
+                    //PropertyChanged?.Invoke(
+                    //    this,
+                    //    new PropertyChangedEventArgs(nameof(FechaFinal)));
                 }
             }
 
         }
+        
         public string Tipo
         {
             get
@@ -141,7 +149,8 @@ namespace AppIm.ViewModels
         #region Constructores
         public AduanaViewModel()
         {
-            fechaInicial = DateTime.Now;
+            //fechaFinal = DateTime.Now;
+            //fechaInicial = DateTime.Now;
             navigationService = new NavigationService();
             dialogService = new DialogService();
             IsEnabled = true;
@@ -158,10 +167,9 @@ namespace AppIm.ViewModels
             }
 
         }
-
         async void Buscar()
         {
-
+            IsRunning = true;
             if (string.IsNullOrEmpty(this.Nit))
             {
                 await dialogService.ShowMessage(
@@ -169,9 +177,13 @@ namespace AppIm.ViewModels
                     "Debes ingresar un Número de Nit");
                 return;
             }
-            
-            IsEnabled = true;
-
+            if (string.IsNullOrEmpty(this.Tipo))
+            {
+                await dialogService.ShowMessage(
+                    "Error",
+                    "Debes ingresar un Número Tipo 'EXPO' 'IMPO'");
+                return;
+            }
             var connection = await dialogService.CheckConnection();
             if (!connection.IsSuccess)
             {
@@ -180,45 +192,49 @@ namespace AppIm.ViewModels
                     connection.Message);
                 return;
             }
-
-            var oBuscar = BuscarAduana(Nit, FechaInicial, FechaFinal, Tipo);
-            if (!oBuscar.Contains("Error"))
+            //var oBuscar = BuscarAduana(Nit, FechaInicial.Date, FechaFinal.Date, Tipo);
+            var oBuscar = BuscarAduana(Nit, fechaInicial.Date, fechaFinal.Date, Tipo);
+            if (oBuscar != null)
             {
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.AduanaWs = new AduanaViewModelWS();
-                navigationService.SetMainPage("AduanaView");
-                IsRunning = true;
+                await navigationService.NavigateOnAduana("AduanaView", oBuscar);
+                IsEnabled = false;
+                IsRunning = false;
             }
             else
             {
                 await dialogService.ShowMessage(
                     "Error",
                     "Algún dato Ingresado no es Correcto");
+                IsRunning = false;
             }
-            IsRunning = false;
+            
             Nit = null;
             IsEnabled = true;
         }
         #endregion
 
-        public string BuscarAduana(string nitA, DateTime fechaIni, DateTime fechaFin, string tipoA)
+        public List<InteligenciaAgenciaAduanaViewModel> BuscarAduana(string nitA, DateTime fechaIni, DateTime fechaFin, string tipoA)
         {
             var client = new HttpClient();
-            string aduana = string.Empty;
+            var aduana = new List<InteligenciaAgenciaAduanaViewModel>();
             try
             {
-                var uri = new Uri("http://192.168.1.67/IM_Api/api/ImServicio/InteligenciaAduanas?cNit=" 
-                    + nitA + "&dFechaInicial=" + fechaIni +"&dFechaFinal="+ fechaFin + "&cTipo="+tipoA);
+                var FechaInic = fechaIni.Date.ToString("dd/MM/yyyy");
+                var FechaFina = fechaFinal.Date.ToString("dd/MM/yyyy");
+                var uri = new Uri("http://192.168.1.67/IM_Api/api/Aduana/InteligenciaAduanas?ccNit="
+                    + nitA + "&ddFechaInicial=" + FechaInic + "&ddFechaFinal=" + FechaFina + "&ccTipo=" + tipoA);
                 var response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var data = response.Content.ReadAsStringAsync().Result;
-                    aduana = JsonConvert.DeserializeObject<string>(data);
+                    aduana = JsonConvert.DeserializeObject<List<InteligenciaAgenciaAduanaViewModel>>(data);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                aduana = ex.Message;
+                aduana = null;
             }
             return aduana;
         }

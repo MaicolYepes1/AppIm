@@ -1,38 +1,39 @@
 ﻿namespace AppIm.ViewModels
 {
+    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using System.Net.Http;
     using AppIm.Services;
     using Models;
-    using Xamarin.Forms;
-
+    using Newtonsoft.Json;
+   
     public class AduanaViewModelWS : BaseViewModel
     {
         private ApiService apiService;
 
-        private ObservableCollection<AduanaWs> aduanaWs;
-       
-        public ObservableCollection<AduanaWs> AduanaWs
+        public List<InteligenciaAgenciaAduanaViewModel> BuscarAduana(string nitA, DateTime fechaIni, DateTime fechaFinal, string tipoA)
         {
-            get { return this.aduanaWs; }
-            set { this.SetValue(ref this.aduanaWs, value); }
-        }
-
-        public AduanaViewModelWS()
-        {
-            this.apiService = new ApiService();
-            this.LoadProducts();
-        }
-        private async void LoadProducts()
-        {
-            var response = await apiService.GetList<AduanaWs>("http://localhost:57409", "/Api", "/ImServicio/InteligenciaAduanas");
-            if (!response.IsSuccess)
+            var client = new HttpClient();
+            var aduana = new List<InteligenciaAgenciaAduanaViewModel>();
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Error", response.Message, "Aceptar");
-                return;
+                var FechaInic = fechaIni.Date.ToString("dd/MM/yyyy");
+                var FechaFina = fechaFinal.Date.ToString("dd/MM/yyyy");
+                var uri = new Uri("http://192.168.1.67/IM_Api/api/ImServicio/InteligenciaAduanas?cNit="
+                    + nitA + "&dFechaInicial=" + FechaInic + "&dFechaFinal=" + FechaFina + "&cTipo=" + tipoA);
+                var response = client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = response.Content.ReadAsStringAsync().Result;
+                    //aduana = JsonConvert.DeserializeObject<<List<InteligenciaAgenciaAduanaViewModel>>(data);
+                    aduana = JsonConvert.DeserializeObject<List<InteligenciaAgenciaAduanaViewModel>>(data);
+                }
             }
-            var list = (List<AduanaWs>)response.Result;
-            this.AduanaWs = new ObservableCollection<AduanaWs>(list);
+            catch (Exception ex)
+            {
+                aduana = null;
+            }
+            return aduana;
         }
     }
 }

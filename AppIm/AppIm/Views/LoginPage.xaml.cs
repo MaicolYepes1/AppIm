@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace AppIm.Views
+﻿namespace AppIm.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+    using Xamarin.Forms;
     public partial class LoginPage : ContentPage
-	{
-		public LoginPage ()
-		{
-			InitializeComponent ();
-		}
-
-        
-	}
+    {
+        public LoginPage()
+        {
+            InitializeComponent();
+        }
+    }
 }

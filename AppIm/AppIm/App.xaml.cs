@@ -15,6 +15,11 @@
             get;
             internal set;
         }
+        public static AduanaView Aduana
+        {
+            get;
+            internal set;
+        }
         #region Constructors
         public App()
         {

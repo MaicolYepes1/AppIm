@@ -2,15 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.AduanaView"
-             BackgroundColor="{StaticResource BackgroundColor}"
-             BindingContext="{Binding Main, {Binding Locator}}"
+            BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main,Source={StaticResource Locator}}"
              Title="Inteligencia de Aduana">
     <ContentPage.Content
         BindingContext="{Binding AduanaWs}">
         <ScrollView>
-            <ListView
-                ItemsSource="{Binding AduanaWs}">
-                
+            <ListView x:Name="LisAduan">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="60" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="Participación :" 
+                                       Grid.Column="0" 
+                                       HorizontalOptions="Start"
+                                       Margin="5"
+                                       TextColor="{StaticResource FontColor}"></Label>
+                                <Label 
+                                    Grid.Column="1"
+                                    Text="{Binding Participacion}"
+                                    VerticalTextAlignment="Center"
+                                    Margin="5"
+                                    TextColor="{StaticResource FontColor}"/>
+                                <!--<Image Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Source="ic_flecha_derecha.png" />-->
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </ScrollView>
     </ContentPage.Content>

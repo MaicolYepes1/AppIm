@@ -9,5 +9,10 @@
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void FechaFinal_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            FechaFinal.Date = e.NewDate.Date;
+        }
+    }
 }
