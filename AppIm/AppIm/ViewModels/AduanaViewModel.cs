@@ -9,8 +9,6 @@
     using System.Net.Http;
     using System.Collections.Generic;
     using AppIm.Models;
-    using Xamarin.Forms;
-    using AppIm.Views;
 
     public class AduanaViewModel : INotifyPropertyChanged
     {
@@ -149,8 +147,8 @@
         #region Constructores
         public AduanaViewModel()
         {
-            //fechaFinal = DateTime.Now;
-            //fechaInicial = DateTime.Now;
+
+            fechaInicial = DateTime.Now;
             navigationService = new NavigationService();
             dialogService = new DialogService();
             IsEnabled = true;
@@ -165,11 +163,12 @@
             {
                 return new RelayCommand(Buscar);
             }
-
         }
         async void Buscar()
         {
             IsRunning = true;
+            this.Nit = "890902266";
+
             if (string.IsNullOrEmpty(this.Nit))
             {
                 await dialogService.ShowMessage(
@@ -197,7 +196,7 @@
             if (oBuscar != null)
             {
                 var mainViewModel = MainViewModel.GetInstance();
-                mainViewModel.AduanaWs = new AduanaViewModelWS();
+                mainViewModel.AduanaG = new AduanaViewModelGrid();
                 await navigationService.NavigateOnAduana("AduanaView", oBuscar);
                 IsEnabled = false;
                 IsRunning = false;

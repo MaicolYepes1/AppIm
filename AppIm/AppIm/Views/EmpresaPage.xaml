@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout 
-                BindingContext="{Binding Aduana}"
+                BindingContext="{Binding Empresa}"
                 Padding="20.0">
                 <Label  VerticalOptions="Center" 
                         Text="INTELIGENCIA EMPRESAS"
@@ -89,6 +89,7 @@
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Buscar" 
+                        Command="{Binding BuscarCommand}"
                         TextColor="{StaticResource FontColor}"
                         BorderRadius="23" 
                         BackgroundColor="{StaticResource MainColor}" 

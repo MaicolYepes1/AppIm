@@ -1,42 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:dg= "clr-namespace: Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.AduanaView"
-            BackgroundColor="{StaticResource BackgroundColor}"
+             BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              Title="Inteligencia de Aduana">
     <ContentPage.Content
         BindingContext="{Binding AduanaWs}">
-        <ScrollView>
-            <ListView x:Name="LisAduan">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="60" >
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Label Text="Participación :" 
-                                       Grid.Column="0" 
-                                       HorizontalOptions="Start"
-                                       Margin="5"
-                                       TextColor="{StaticResource FontColor}"></Label>
-                                <Label 
-                                    Grid.Column="1"
-                                    Text="{Binding Participacion}"
-                                    VerticalTextAlignment="Center"
-                                    Margin="5"
-                                    TextColor="{StaticResource FontColor}"/>
-                                <!--<Image Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Source="ic_flecha_derecha.png" />-->
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+        <ScrollView
+            Padding="15">
+
+            <ScrollView Orientation="Horizontal">
+                <dg:DataGrid x:Name="GridAduana"
+                             SelectionEnabled="False"
+                             RowHeight="70" 
+                             HeaderHeight="30" 
+                             Padding="5,10"
+                             BorderColor="{StaticResource MainColor}" 
+                             HeaderBackground="{StaticResource AccentColor2}">
+                    <!--PullToRefreshCommand="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">-->
+                    <dg:DataGrid.HeaderFontSize>
+                        <OnIdiom  x:TypeArguments="x:Double">
+                            <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                            <OnIdiom.Phone>13</OnIdiom.Phone>
+                        </OnIdiom>
+                    </dg:DataGrid.HeaderFontSize>
+                    <dg:DataGrid.Columns>
+                        <!--<dg:DataGridColumn Title="Impo/Expo" PropertyName="RazonSocial" Width="2*" />-->
+                        <dg:DataGridColumn Title="Impo/Expo" PropertyName="RazonSocial" Width="*" />
+                        <dg:DataGridColumn Title="Nit" PropertyName="Nit" Width="*"/>
+                        <dg:DataGridColumn Title="Nro Declas" PropertyName="NroDeclas" Width="*"/>
+                        <dg:DataGridColumn Title="Cantidad Operaciones" PropertyName="CantidadOperaciones" Width="*"/>
+                        <dg:DataGridColumn Title="Total Fob" PropertyName="TotalFob" Width="*"/>
+                        <dg:DataGridColumn Title="Total Fob Pesos" PropertyName="TotalFobPesos" Width="*"/>
+                        <dg:DataGridColumn Title="Peso Neto" PropertyName="PesoNeto" Width="*"/>
+                        <dg:DataGridColumn Title="Peso Bruto" PropertyName="PesoBruto" Width="*"/>
+                        <dg:DataGridColumn Title="Participación" PropertyName="Participacion" Width="*"/>
+                        <dg:DataGridColumn Title="Tipo" PropertyName="Tipo" Width="*"/>
+                    </dg:DataGrid.Columns>
+                </dg:DataGrid>
+            </ScrollView>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

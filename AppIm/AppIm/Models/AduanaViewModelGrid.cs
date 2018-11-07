@@ -1,17 +1,12 @@
-﻿namespace AppIm.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AppIm.Models
 {
-    public class InteligenciaAgenciaAduanaViewModel
+    public class AduanaViewModelGrid
     {
-        public string NombreImpo
-        {
-            get;
-            set;
-        }
-        public string NombreExpo
-        {
-            get;
-            set;
-        }
+        public string RazonSocial { get; set; }
         public string Nit
         {
             get;

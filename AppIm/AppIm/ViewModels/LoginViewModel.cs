@@ -141,6 +141,8 @@
         async void Login()
         {
             IsRunning = true;
+            this.Usuario = "carolinarosero";
+            this.Pass = "Coral2013";
             if (string.IsNullOrEmpty(this.Usuario))
             {
                 await dialogService.ShowMessage(

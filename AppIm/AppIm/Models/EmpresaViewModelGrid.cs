@@ -1,23 +1,18 @@
 ﻿namespace AppIm.Models
 {
-    public class InteligenciaAgenciaAduanaViewModel
+    public class EmpresaViewModelGrid
     {
-        public string NombreImpo
+        public string Declarante
         {
             get;
             set;
         }
-        public string NombreExpo
+        public string Identificacion
         {
             get;
             set;
         }
-        public string Nit
-        {
-            get;
-            set;
-        }
-        public int NroDeclas
+        public int NumeroClas
         {
             get;
             set;
@@ -37,32 +32,17 @@
             get;
             set;
         }
-        public decimal PesoNeto
-        {
-            get;
-            set;
-        }
-        public decimal PesoBruto
-        {
-            get;
-            set;
-        }
         public decimal Participacion
         {
             get;
             set;
         }
-        public string Tipo
+        public decimal TotalFobs
         {
             get;
             set;
         }
         public decimal TotalFobPesos
-        {
-            get;
-            set;
-        }
-        public decimal TotalFob
         {
             get;
             set;

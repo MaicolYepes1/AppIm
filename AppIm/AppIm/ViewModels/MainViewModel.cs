@@ -54,7 +54,7 @@
             get;
             set;
         }
-        public AduanaViewModelWS AduanaWs
+        public AduanaViewModelGrid AduanaG
         {
             get;
             set;

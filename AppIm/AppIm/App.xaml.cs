@@ -23,6 +23,8 @@
         #region Constructors
         public App()
         {
+            Xamarin.Forms.DataGrid.DataGridComponent.Init();
+
             InitializeComponent();
 
             this.MainPage = new NavigationPage(new LoginPage());
