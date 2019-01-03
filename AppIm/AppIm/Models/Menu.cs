@@ -4,7 +4,6 @@
     using System.Windows.Input;
     using AppIm.ViewModels;
     using AppIm.Services;
-    using AppIm.Views;
     
     public class Menu
     {
@@ -28,6 +27,7 @@
 
         #region Servicios
         NavigationService navigationService;
+        //DialogService dialogService;
         #endregion
 
         #region Contructores
@@ -61,7 +61,7 @@
                     break;
                 case "AduanaPage":
                     MainViewModel.GetInstance().Aduana =
-                        new AduanaViewModel();
+                        new InteligenciaAduanaViewModel();
                     await navigationService.NavigateOnMaster
                         ("AduanaPage");
                     break;
@@ -72,22 +72,16 @@
                         ("EmpresaPage");
                     break;
                 case "ImportacionesPage":
-                    MainViewModel.GetInstance().Importaciones =
-                        new ImportacionesViewModel();
+                    MainViewModel.GetInstance().ImportacionesController =
+                        new TopImpoViewModel();
                     await navigationService.NavigateOnMaster
                         ("ImportacionesPage");
                     break;
                 case "ExportacionesPage":
-                    MainViewModel.GetInstance().Exportaciones =
-                        new ExportacionesViewModel();
+                    MainViewModel.GetInstance().ExportacionesControl =
+                        new ExportacionesViewModelController();
                     await navigationService.NavigateOnMaster
                         ("ExportacionesPage");
-                    break;
-                case "OportunidadesPage":
-                    MainViewModel.GetInstance().Oportunidades =
-                        new OportunidadesViewModel();
-                    await navigationService.NavigateOnMaster
-                        ("OportunidadesPage");
                     break;
                 case "LicitacionesPage":
                     MainViewModel.GetInstance().Licitaciones =
@@ -98,20 +92,5 @@
             }
         }
         #endregion
-
-        #region Metodos
-        //void Navigate()
-        //{
-        //    switch (pageName)
-        //    {
-        //        case "LoginPage":
-        //            Application.Current.MainPage.Navigation.PushAsync(
-        //        new LoginPage());
-        //            break;
-        //    }
-        //}
-        #endregion
-
-
     }
 }

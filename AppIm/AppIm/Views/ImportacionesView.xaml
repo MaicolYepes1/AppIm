@@ -1,10 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="AGENCIA DE ADUANAS"
              x:Class="AppIm.Views.ImportacionesView">
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <ScrollView Padding="15">
+            <ScrollView Orientation="Horizontal">
+                <dg:DataGrid x:Name="GridImpo"
+                             ColumnSpacing="10"
+                             RowHeight="100" 
+                             HeaderHeight="40" 
+                             Padding="10,10"
+                             SelectionEnabled="True"
+                             ActiveRowColor="#7AB7CF"
+                             BorderColor="Black"
+                             HeaderBackground="{StaticResource AccentColor1}">
+                    <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="Agencia" PropertyName="Agencia" Width="150" />
+                        <dg:DataGridColumn Title="Identificación" PropertyName="Identificacion" Width="*"/>
+                        <dg:DataGridColumn Title="Operaciones" PropertyName="Operaciones" Width="*"/>
+                        <dg:DataGridColumn Title="Número Declas." PropertyName="NumeroClase" Width="*"/>
+                        <dg:DataGridColumn Title="Valor Cif" PropertyName="ValorCif" Width="150"/>
+                        <dg:DataGridColumn Title="Cantidad" PropertyName="Cantidad" Width="*"/>
+                        <dg:DataGridColumn Title="Peso Neto" PropertyName="PesoNeto" Width="*"/>
+                        <dg:DataGridColumn Title="Peso Bruto" PropertyName="PesoBruto" Width="*"/>
+                    </dg:DataGrid.Columns>
+                    <dg:DataGrid.RowsBackgroundColorPalette>
+                        <dg:PaletteCollection>
+                            <Color>#F2F2F2</Color>
+                            <Color>#FFFFFF</Color>
+                        </dg:PaletteCollection>
+                    </dg:DataGrid.RowsBackgroundColorPalette>
+                </dg:DataGrid>
+            </ScrollView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

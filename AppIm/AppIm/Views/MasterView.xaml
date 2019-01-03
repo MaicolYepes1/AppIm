@@ -10,7 +10,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage 
             BarTextColor="{StaticResource FontColor}"
-            BarBackgroundColor="{StaticResource MainColor}"
+            BarBackgroundColor="{StaticResource AccentColor2}"
             x:Name="Navigator">
             <x:Arguments>
                 <pages:OpcionesView/>

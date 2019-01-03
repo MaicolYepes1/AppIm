@@ -9,63 +9,87 @@
         <ScrollView 
             BindingContext="{Binding Login}">
             <StackLayout Padding="5">
+                <Label></Label>
                 <Image Margin="20"
                        Source="LogoIM1.png" WidthRequest="200"
                        HorizontalOptions="Center">
                 </Image>
+                <Label></Label>
+                <Label></Label>
                 <Grid Margin="10,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0"
+                           Grid.Row="0"
+                           VerticalOptions="Start"
+                           Source="user.png"
+                           WidthRequest="60"></Image>
                     <Label VerticalOptions="Center" 
                            Text="Usuario :"
                            Grid.Row="0" 
-                           Grid.Column="0"
+                           Grid.Column="1"
                            TextColor="{StaticResource FontColor}"></Label>
                     <Entry Placeholder="Usuario"
                            TextColor="Black"
                            PlaceholderColor="Gray"
                            Grid.Row="0" 
-                           Grid.Column="1"
+                           Grid.Column="2"
                            Text="{Binding Usuario, Mode=TwoWay}"></Entry>
+                    <Image 
+                        Grid.Column="0"
+                           Grid.Row="1"
+                        VerticalOptions="Center"
+                        Source="pass.png"
+                        WidthRequest="60"></Image>
                     <Label VerticalOptions="Center"
                            TextColor="{StaticResource FontColor}"
                            Text="Contraseña :" 
                            Grid.Row="1" 
-                           Grid.Column="0" ></Label>
+                           Grid.Column="1" ></Label>
                     <Entry IsSpellCheckEnabled="True" 
                            IsPassword="True"
                            TextColor="Black"
                            PlaceholderColor="Gray"
                            Placeholder="Contraseña"
                            Grid.Row="1"
-                           Grid.Column="1"
+                           Grid.Column="2"
                            Text="{Binding Pass, Mode=TwoWay}"></Entry>
                 </Grid>
                 <StackLayout Margin="10,0"
-                             Orientation="Horizontal">
-                    <Label VerticalOptions="Center"
-                           TextColor="{StaticResource FontColor}"
-                           Text="Recordarme en esté dispositivo :"
-                           HorizontalOptions="StartAndExpand"></Label>
-                    <Switch OnColor="{StaticResource MainColor}"
-                            IsToggled="{Binding IsRemembered, Mode=TwoWay}"
-                            HorizontalOptions="End"></Switch>
-                </StackLayout>
-                <ActivityIndicator 
+                             Orientation="Vertical">
+                    <ActivityIndicator 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsRunning}"
+                    x:Name="Indicator"
                     Color="{StaticResource MainColor}"
                     IsRunning="{Binding IsRunning, Mode=TwoWay}">
-                </ActivityIndicator>
-                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    </ActivityIndicator>
+                </StackLayout>
+                <StackLayout 
+                    Margin="10,0">
+                    <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Ingresar" 
-                        TextColor="{StaticResource AccentColor2}"
+                        TextColor="Black"   
                         BorderRadius="23" 
                         BackgroundColor="{StaticResource AccentColor1}" 
                         HeightRequest="46"
                         Command="{Binding LoginCommand}"/>
+                </StackLayout>
+                <!--<ProgressBar 
+                         x:Name="ProgressBar"
+                         WidthRequest="150"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         HeightRequest="20"
+                         ProgressColor="{StaticResource AccentColor1}"
+                         Progress="0.2">
+                </ProgressBar>-->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

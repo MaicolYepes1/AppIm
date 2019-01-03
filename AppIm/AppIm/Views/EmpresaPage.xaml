@@ -17,8 +17,26 @@
                         Grid.Column="0"
                         TextColor="{StaticResource FontColor}">
                 </Label>
-                <Label></Label>
-                <Label></Label>
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" 
+                           Text="Razón Social :"
+                           Grid.Row="0" 
+                           Grid.Column="0"
+                           TextColor="{StaticResource FontColor}">
+                    </Label>
+                    <Entry 
+                           Placeholder="razón social"
+                           TextColor="Black"
+                           PlaceholderColor="Gray"
+                           Grid.Row="0" 
+                           Grid.Column="1"
+                           Text="{Binding Nombre, Mode=TwoWay}">
+                    </Entry>
+                </Grid>
                 <Grid Margin="10,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -30,11 +48,14 @@
                            Grid.Column="0"
                            TextColor="{StaticResource FontColor}">
                     </Label>
-                    <Entry Placeholder="nit"
+                    <Entry 
+                           Keyboard="Numeric"
+                           Placeholder="nit"
                            TextColor="Black"
                            PlaceholderColor="Gray"
                            Grid.Row="0" 
-                           Grid.Column="1">
+                           Grid.Column="1"
+                           Text="{Binding Nit, Mode=TwoWay}">
                     </Entry>
                     <Label VerticalOptions="Center"
                            TextColor="{StaticResource FontColor}"
@@ -51,9 +72,9 @@
                     <DatePicker
                         Grid.Row="1" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        MinimumDate="01/01/2016"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaInicial, Mode=TwoWay}" />
                     <Label VerticalOptions="Center" 
                            Text="Fecha Final :"
                            TextColor="{StaticResource FontColor}"
@@ -63,9 +84,9 @@
                     <DatePicker
                         Grid.Row="2" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        MinimumDate="01/01/2016"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaFinal, Mode=TwoWay}" />
                     <Label
                            VerticalOptions="Center" 
                            Text="Tipo:"
@@ -76,14 +97,16 @@
                     <Picker 
                         TextColor="{StaticResource FontColor}"
                         Grid.Row="3" 
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        SelectedItem="{Binding Tipo, Mode=TwoWay}">
                         <Picker.Items>
                             <x:String>IMPO</x:String>
                             <x:String>EXPO</x:String>
                         </Picker.Items>
                     </Picker>
                 </Grid>
-                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                <ActivityIndicator
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
                 <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"

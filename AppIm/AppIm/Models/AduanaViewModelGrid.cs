@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.Models
+﻿namespace AppIm.Models
 {
     public class AduanaViewModelGrid
     {
-        public string RazonSocial { get; set; }
+        public string RazonSocial
+        {
+            get;
+            set;
+        }
         public string Nit
         {
             get;
@@ -32,17 +32,17 @@ namespace AppIm.Models
             get;
             set;
         }
-        public decimal PesoNeto
+        public string PesoNeto
         {
             get;
             set;
         }
-        public decimal PesoBruto
+        public string PesoBruto
         {
             get;
             set;
         }
-        public decimal Participacion
+        public string Participacion
         {
             get;
             set;
@@ -52,12 +52,12 @@ namespace AppIm.Models
             get;
             set;
         }
-        public decimal TotalFobPesos
+        public string TotalFobPesos
         {
             get;
             set;
         }
-        public decimal TotalFob
+        public string TotalFob
         {
             get;
             set;

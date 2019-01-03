@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace AppIm.Views
+﻿namespace AppIm.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    using AppIm.Services;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LicitacionesPage : ContentPage
 	{
 		public LicitacionesPage ()
 		{
 			InitializeComponent ();
-		}
+            CargarLicitaciones();
+        }
+
+        public void CargarLicitaciones()
+        {
+            var listLicitaciones = new ConsumirWebApi().ObtenerLicitaciones("Licitaciones");
+            if (listLicitaciones != null)
+            {
+                GridLicitaciones.ItemsSource = listLicitaciones;
+            }
+        }
 	}
 }

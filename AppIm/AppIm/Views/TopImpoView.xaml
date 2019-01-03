@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppIm.Views.TopImpoView"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Top Importaciones">
+  <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+            HorizontalOptions="Center"
+            Padding="20"
+            BindingContext="{Binding ImportacionesController}">
+                <Label 
+                    TextColor="{StaticResource FontColor}"
+                    Text="RANKING DE IMPORTACIONES"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center"
+                           TextColor="{StaticResource FontColor}"
+                           Text="Fecha Inicial :" 
+                           Grid.Row="1" 
+                           Grid.Column="0" >
+                    </Label>
+                    <DatePicker
+                        x:Name="dtpFechaIncial"
+                        Grid.Row="1" 
+                        Grid.Column="1"
+                        MinimumDate="01/01/2017"
+                        MaximumDate="12/31/2020"
+                        Date="{Binding FechaInicial}" />
+                    <Label VerticalOptions="Center" 
+                           Text="Fecha Final :"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="2" 
+                           Grid.Column="0"
+                           ></Label>
+                    <DatePicker
+                        Grid.Row="2" 
+                        Grid.Column="1"
+                        x:Name="dtpFechaFinal"
+                        MinimumDate="01/01/2017"
+                        MaximumDate="12/31/2020"
+                        Date="{Binding FechaFinal}" />
+                    <Label
+                           VerticalOptions="Center" 
+                           Text="Tipo:"
+                           TextColor="{StaticResource FontColor}"
+                           Grid.Row="3" 
+                           Grid.Column="0">
+                    </Label>
+                    <Picker 
+                        SelectedItem="{Binding Tipo, Mode=TwoWay}"
+                        TextColor="{StaticResource FontColor}"
+                        Grid.Row="3" 
+                        Grid.Column="1">
+                        <Picker.Items>
+                            <x:String>AGENCIA DE ADUANAS</x:String>
+                            <x:String>IMPORTADOR</x:String>
+                            <x:String>ADUANA</x:String>
+                            <x:String>PAIS EMBARQUE</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Grid>
+                <StackLayout Margin="10,0"
+                             Orientation="Vertical">
+                    <ActivityIndicator
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="Indicator"
+                    Color="{StaticResource MainColor}"
+                    IsVisible="{Binding IsRunning}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                    </ActivityIndicator>
+                </StackLayout>
+                <Button Command="{Binding BuscarCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        VerticalOptions="Center"
+                        Margin="100,0" 
+                        Text="Buscar" 
+                        TextColor="Black"
+                        BorderRadius="23" 
+                        BackgroundColor="{StaticResource MainColor}" 
+                        HeightRequest="46">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

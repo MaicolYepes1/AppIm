@@ -22,27 +22,32 @@
             get;
             set;
         }
-        public decimal ValorCif
+        public string ValorCif
         {
             get;
             set;
         }
-        public decimal ValorCifCop
+        public string ValorCifCop
         {
             get;
             set;
         }
-        public decimal Participacion
+        public string Participacion
         {
             get;
             set;
         }
-        public decimal TotalFobs
+        public string TotalFobs
         {
             get;
             set;
         }
         public decimal TotalFobPesos
+        {
+            get;
+            set;
+        }
+        public string Tipo
         {
             get;
             set;

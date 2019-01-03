@@ -9,22 +9,24 @@
     using System.Net.Http;
     using System.Collections.Generic;
     using AppIm.Models;
+    using Xamarin.Forms;
 
-    public class AduanaViewModel : INotifyPropertyChanged
+    public class InteligenciaAduanaViewModel : INotifyPropertyChanged
     {
         #region Eventos
         public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<Xamarin.Forms.DateChangedEventArgs> DateSelected;
+        public event PropertyChangedEventHandler OnPropertyChanged;
         #endregion
 
         #region Atributos
+        string razonSocial;
         string nit;
         DateTime fechaInicial;
         DateTime fechaFinal;
         string tipo;
         bool isRunning;
         bool isEnabled;
-
+        private bool isRefreshing = false;
         #endregion
 
         #region Servicios
@@ -33,6 +35,23 @@
         #endregion
 
         #region Propiedades
+        public string RazonSocial
+        {
+            get
+            {
+                return razonSocial;
+            }
+            set
+            {
+                if (razonSocial != value)
+                {
+                    razonSocial = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(RazonSocial)));
+                }
+            }
+        }
         public DateTime FechaInicial
         {
             get
@@ -81,14 +100,9 @@
                     PropertyChanged?.Invoke(
                         this,
                         new PropertyChangedEventArgs("FechaFinal"));
-                    //PropertyChanged?.Invoke(
-                    //    this,
-                    //    new PropertyChangedEventArgs(nameof(FechaFinal)));
                 }
             }
-
         }
-        
         public string Tipo
         {
             get
@@ -140,23 +154,42 @@
                 }
             }
         }
-
-
+        public bool IsRefreshing
+        {
+            get { return isRefreshing; }
+            set
+            {
+                isRefreshing = value;
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(IsRefreshing)));
+            }
+        }
         #endregion
 
         #region Constructores
-        public AduanaViewModel()
+        public InteligenciaAduanaViewModel()
         {
-
+            fechaFinal = DateTime.Now;
             fechaInicial = DateTime.Now;
             navigationService = new NavigationService();
             dialogService = new DialogService();
             IsEnabled = true;
-
         }
         #endregion
 
         #region Comandos
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsRefreshing = true;
+                    IsRefreshing = false;
+                });
+            }
+        }
         public ICommand BuscarCommand
         {
             get
@@ -167,20 +200,20 @@
         async void Buscar()
         {
             IsRunning = true;
-            this.Nit = "890902266";
-
-            if (string.IsNullOrEmpty(this.Nit))
+            if (string.IsNullOrEmpty(this.Nit) & string.IsNullOrEmpty(this.RazonSocial))
             {
                 await dialogService.ShowMessage(
                     "Error",
-                    "Debes ingresar un Número de Nit");
+                    "Debes llenar al menos uno de estos dos campos.");
+                IsRunning = false;
                 return;
             }
             if (string.IsNullOrEmpty(this.Tipo))
             {
                 await dialogService.ShowMessage(
                     "Error",
-                    "Debes ingresar un Número Tipo 'EXPO' 'IMPO'");
+                    "Debes ingresar un Tipo 'EXPO' 'IMPO'");
+                IsRunning = false;
                 return;
             }
             var connection = await dialogService.CheckConnection();
@@ -189,12 +222,21 @@
                 await dialogService.ShowMessage(
                     "Error",
                     connection.Message);
+                IsRunning = false;
                 return;
             }
-            //var oBuscar = BuscarAduana(Nit, FechaInicial.Date, FechaFinal.Date, Tipo);
-            var oBuscar = BuscarAduana(Nit, fechaInicial.Date, fechaFinal.Date, Tipo);
-            if (oBuscar != null)
+            var oBuscar = BuscarAduana(RazonSocial, Nit, fechaInicial.Date, fechaFinal.Date, Tipo);
+            if (oBuscar.Count != 0)
             {
+                var connection2 = await dialogService.CheckConnection();
+                if (!connection2.IsSuccess)
+                {
+                    await dialogService.ShowMessage(
+                        "Error",
+                        connection.Message);
+                    IsRunning = false;
+                    return;
+                }
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.AduanaG = new AduanaViewModelGrid();
                 await navigationService.NavigateOnAduana("AduanaView", oBuscar);
@@ -205,7 +247,7 @@
             {
                 await dialogService.ShowMessage(
                     "Error",
-                    "Algún dato Ingresado no es Correcto");
+                    "No se encontraron datos relacionados con la busqueda.");
                 IsRunning = false;
             }
             
@@ -214,7 +256,7 @@
         }
         #endregion
 
-        public List<InteligenciaAgenciaAduanaViewModel> BuscarAduana(string nitA, DateTime fechaIni, DateTime fechaFin, string tipoA)
+        public List<InteligenciaAgenciaAduanaViewModel> BuscarAduana(string NombreEmpresaE, string nitA, DateTime fechaIni, DateTime fechaFin, string tipoA)
         {
             var client = new HttpClient();
             var aduana = new List<InteligenciaAgenciaAduanaViewModel>();
@@ -222,8 +264,8 @@
             {
                 var FechaInic = fechaIni.Date.ToString("dd/MM/yyyy");
                 var FechaFina = fechaFinal.Date.ToString("dd/MM/yyyy");
-                var uri = new Uri("http://192.168.1.67/IM_Api/api/Aduana/InteligenciaAduanas?ccNit="
-                    + nitA + "&ddFechaInicial=" + FechaInic + "&ddFechaFinal=" + FechaFina + "&ccTipo=" + tipoA);
+                var uri = new Uri("http://179.50.16.169/IM_Api/api/Aduana/InteligenciaAduanas?ccNit=" + nitA + "&Nombre="
+                    + NombreEmpresaE + "&ddFechaInicial=" + FechaInic + "&ddFechaFinal=" + FechaFina + "&ccTipo=" + tipoA);
                 var response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {

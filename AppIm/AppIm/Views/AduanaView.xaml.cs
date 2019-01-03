@@ -9,7 +9,6 @@
         public AduanaView()
         {
             InitializeComponent();
-            //LisAduan.ItemsSource = ListaAduana;
             GridAduana.ItemsSource = this.ListaAduana;
         }
         
@@ -25,11 +24,12 @@
                     Nit = item.Nit,
                     NroDeclas = item.NroDeclas,
                     CantidadOperaciones = item.CantidadOperaciones,
-                    TotalFob = item.TotalFob,
-                    TotalFobPesos = item.TotalFobPesos,
-                    PesoNeto = item.PesoNeto,
-                    PesoBruto = item.PesoBruto,
-                    Participacion = item.Participacion,
+                    TotalFob = string.Format("{0,-28:C2}", item.TotalFob) ,
+                    TotalFobPesos = string.Format("{0,-28:C2}", item.TotalFobPesos),
+                    PesoNeto = string.Format("{0:0,0.0}", item.PesoNeto),
+                    PesoBruto = string.Format("{0:0,0.0}", item.PesoBruto),
+                    Participacion = item.Participacion.ToString() + "%",
+                    //Participacion = string.Format("{0:0.0,0%}", item.Participacion),
                     Tipo = item.Tipo
                 };
                 ListaAduana.Add(aduana);

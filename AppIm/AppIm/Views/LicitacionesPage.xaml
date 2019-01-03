@@ -1,33 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              x:Class="AppIm.Views.LicitacionesPage"
              BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Licitaciones">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout
-            HorizontalOptions="Center"
-            Padding="20"
-            BindingContext="{Binding Licitaciones}">
-                <StackLayout >
-                    <Image  
-                    WidthRequest="200"
-                    Source="LogoIM1.png"></Image>
-                </StackLayout>
-                <StackLayout Padding="5,10">
-                    <Label 
-                FontSize="Large"
-                TextColor="Black"
-                HorizontalOptions="Center"
-                Text="LICITACIONES"></Label>
-                </StackLayout>
-                <Label 
-                FontSize="Large"
-                TextColor="{StaticResource FontColor}"
-                Text="Con la ayuda de nuestro departamento de investigaciones y telemercadeo esta información es actualizada diariamente, en donde la empresa contactada proporciona la fecha en la cual realizan la licitación. Encontraremos en este ítem razón social, fecha de apertura de la licitación, contacto, cantidad de operaciones tanto en impo como en expo, ciudad, teléfono y dirección. El número de operaciones es calculado con base al último año."></Label>
-            </StackLayout>
+            <ScrollView Orientation="Horizontal">
+                <dg:DataGrid x:Name="GridLicitaciones"
+                             ColumnSpacing="10"
+                             RowHeight="100" 
+                             HeaderHeight="40" 
+                             Padding="10,10"
+                             SelectionEnabled="True"
+                             ActiveRowColor="#7AB7CF"
+                             BorderColor="Black"
+                             HeaderBackground="{StaticResource AccentColor1}">
+                    <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="Razón Social" PropertyName="RazoSocial" Width="150" />
+                        <dg:DataGridColumn Title="F. Encuesta" PropertyName="FechaEncuesta" Width="*" />
+                        <dg:DataGridColumn Title="F. Apertura" PropertyName="FechaApertura" Width="*" />
+                        <dg:DataGridColumn Title="Contacto" PropertyName="Contacto" Width="100" />
+                        <dg:DataGridColumn Title="Observaciones" PropertyName="Observaciones" Width="350" />
+                        <dg:DataGridColumn Title="Oper. Impo." PropertyName="OperImpo" Width="*" />
+                        <dg:DataGridColumn Title="Oper. Expo." PropertyName="OperExpo" Width="*" />
+                        <dg:DataGridColumn Title="Ciudad" PropertyName="Ciudad" Width="*" />
+                        <dg:DataGridColumn Title="Teléfono" PropertyName="Telefono" Width="*" />
+                        <dg:DataGridColumn Title="Dirección" PropertyName="Direccion" Width="150" />
+                    </dg:DataGrid.Columns>
+                    <dg:DataGrid.RowsBackgroundColorPalette>
+                        <dg:PaletteCollection>
+                            <Color>#F2F2F2</Color>
+                            <Color>#FFFFFF</Color>
+                        </dg:PaletteCollection>
+                    </dg:DataGrid.RowsBackgroundColorPalette>
+                </dg:DataGrid>
+            </ScrollView>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

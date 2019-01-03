@@ -10,7 +10,7 @@
             <StackLayout
             HorizontalOptions="Center"
             Padding="20"
-            BindingContext="{Binding Exportaciones}">
+            BindingContext="{Binding ImportacionesController}">
                 <Label 
                     TextColor="{StaticResource FontColor}"
                     Text="RANKING DE IMPORTACIONES"></Label>
@@ -26,11 +26,12 @@
                            Grid.Column="0" >
                     </Label>
                     <DatePicker
+                        x:Name="dtpFechaIncial"
                         Grid.Row="1" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        MinimumDate="01/01/2017"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaInicial}" />
                     <Label VerticalOptions="Center" 
                            Text="Fecha Final :"
                            TextColor="{StaticResource FontColor}"
@@ -40,9 +41,10 @@
                     <DatePicker
                         Grid.Row="2" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        x:Name="dtpFechaFinal"
+                        MinimumDate="01/01/2017"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaFinal}" />
                     <Label
                            VerticalOptions="Center" 
                            Text="Tipo:"
@@ -51,6 +53,7 @@
                            Grid.Column="0">
                     </Label>
                     <Picker 
+                        SelectedItem="{Binding Tipo, Mode=TwoWay}"
                         TextColor="{StaticResource FontColor}"
                         Grid.Row="3" 
                         Grid.Column="1">
@@ -62,9 +65,17 @@
                         </Picker.Items>
                     </Picker>
                 </Grid>
-                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
-                </ActivityIndicator>
-                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                <StackLayout Margin="10,0"
+                             Orientation="Vertical">
+                    <ActivityIndicator 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Color="{StaticResource MainColor}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                    </ActivityIndicator>
+                </StackLayout>
+                <Button Command="{Binding BuscarCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Buscar" 

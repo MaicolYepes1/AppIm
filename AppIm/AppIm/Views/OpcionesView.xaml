@@ -1,39 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
              x:Class="AppIm.Views.OpcionesView"
              BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Opciones">
+             Title="Oportunidades">
     <ContentPage.ToolbarItems 
         BacgrounndColor="{StaticResource MainColor}">
         <ToolbarItem
             Icon="ingreso.png"/>
     </ContentPage.ToolbarItems>
-
-    <ScrollView>
-        <StackLayout
-            HorizontalOptions="Center"
-            Padding="20"
-            BindingContext="{Binding Opciones}">
-            <StackLayout >
-                <Image  
-                    WidthRequest="200"
-                    Source="LogoIM1.png"></Image>
-            </StackLayout>
-            <StackLayout Padding="5,10">
-                <Label 
-                FontSize="Large"
-                TextColor="Black"
-                HorizontalOptions="Center"
-                Text="¿POR QUE ELEJIRNOS?"></Label>
-            </StackLayout>
-            <Label 
-                FontSize="Large"
-                TextColor="{StaticResource FontColor}"
-                Text="Somos una empresa con más de 14 años en el mercado, que nos han permitido convertirnos en una empresa líder en la inteligencia de mercado para el comercio exterior.
-                
-                Siempre del lado de nuestros clientes, buscamos mejoras continuas, para siempre estar a la altura del mercado."></Label>
-        </StackLayout>
+    <ScrollView
+        BindingContext="{Binding Opciones}">
+        <ScrollView Orientation="Horizontal">
+            <dg:DataGrid     x:Name="GridOportunidades"
+                             ColumnSpacing="10"
+                             RowHeight="100" 
+                             HeaderHeight="40" 
+                             Padding="10,10"
+                             SelectionEnabled="True"
+                             ActiveRowColor="#7AB7CF"
+                             BorderColor="Black"
+                             HeaderBackground="{StaticResource AccentColor1}">
+                <dg:DataGrid.Columns>
+                    <dg:DataGridColumn Title="RazoSocial" PropertyName="RazoSocial" Width="150" />
+                    <dg:DataGridColumn Title="F. Encuesta" PropertyName="FechaEncuesta" Width="*" />
+                    <dg:DataGridColumn Title="Contacto" PropertyName="Contacto" Width="*" />
+                    <dg:DataGridColumn Title="Observaciones" PropertyName="Observaciones" Width="350"  />
+                    <dg:DataGridColumn Title="Oper. Impo." PropertyName="OperImpo" Width="*" />
+                    <dg:DataGridColumn Title="Oper. Expo." PropertyName="OperExpo" Width="*" />
+                    <dg:DataGridColumn Title="Ciudad" PropertyName="Ciudad" Width="*" />
+                    <dg:DataGridColumn Title="Teléfono" PropertyName="Telefono" Width="*" />
+                    <dg:DataGridColumn Title="Dirección" PropertyName="Direccion" Width="150" />
+                </dg:DataGrid.Columns>
+                <dg:DataGrid.RowsBackgroundColorPalette>
+                    <dg:PaletteCollection>
+                        <Color>#F2F2F2</Color>
+                        <Color>#FFFFFF</Color>
+                    </dg:PaletteCollection>
+                </dg:DataGrid.RowsBackgroundColorPalette>
+            </dg:DataGrid>
+        </ScrollView>
     </ScrollView>
 </ContentPage>

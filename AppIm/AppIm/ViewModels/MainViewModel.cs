@@ -7,59 +7,19 @@
     {
 
         #region Propiedades
-        public LoginViewModel Login
-        {
-            get;
-            set;
-        }
-
-        public OpcionesViewModel Opciones
-        {
-            get;
-            set;
-        }
-
-        public ObservableCollection<Menu> MyMenu
-        {
-            get;
-            set;
-        }
-        public AduanaViewModel Aduana
-        {
-            get;
-            set;
-        }
-        public EmpresaViewModel Empresa
-        {
-            get;
-            set;
-        }
-        public ExportacionesViewModel Exportaciones
-        {
-            get;
-            set;
-        }
-        public ImportacionesViewModel Importaciones
-        {
-            get;
-            set;
-        }
-        public OportunidadesViewModel Oportunidades
-        {
-            get;
-            set;
-        }
-        public LicitacionesViewModel Licitaciones
-        {
-            get;
-            set;
-        }
-        public AduanaViewModelGrid AduanaG
-        {
-            get;
-            set;
-        }
-
+        public LoginViewModel Login { get; set; }
+        public OpcionesViewModel Opciones { get; set; }
+        public ObservableCollection<Menu> MyMenu { get; set; }
+        public InteligenciaAduanaViewModel Aduana { get; set; }
+        public IntInteligenciaAduanaPageModel AduanaPage { get; set; }
+        public EmpresaViewModel Empresa { get; set; }
+        public ExportacionesViewModelController ExportacionesControl { get; set; }
+        public ExportacionesViewModelC Exportaciones { get; set; }
+        public ImportacionesViewModel Importaciones { get;set; }
+        public LicitacionesViewModel Licitaciones { get; set; }
+        public AduanaViewModelGrid AduanaG { get; set; }
+        public EmpresaViewModelGrid EmpresaR { get; set; }
+        public TopImpoViewModel ImportacionesController { get; set; }
         #endregion
 
         #region Constructores
@@ -93,20 +53,14 @@
                 new Menu
                 {
                     Icon = "Logo3.png",
-                    PageName = "ImportacionesPage",
-                    Title = "Top Importaciones"
-                },
-                new Menu
-                {
-                    Icon = "Logo3.png",
                     PageName = "ExportacionesPage",
                     Title = "Top Exportaciones"
                 },
                 new Menu
                 {
                     Icon = "Logo3.png",
-                    PageName = "OportunidadesPage",
-                    Title = "Oportunidades"
+                    PageName = "ImportacionesPage",
+                    Title = "Top Importaciones"
                 },
                 new Menu
                 {
@@ -126,7 +80,6 @@
 
         #region Singleton
         static MainViewModel instance;
-
         public static MainViewModel GetInstance()
         {
             if (instance == null)
@@ -135,7 +88,6 @@
             }
             return instance;
         }
-
         #endregion
     }
 }

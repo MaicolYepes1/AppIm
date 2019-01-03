@@ -1,10 +1,13 @@
 ﻿namespace AppIm
 {
+    using AppIm.ViewModels;
     using AppIm.Views;
     using Xamarin.Forms;
 
     public partial class App : Application
     {
+        
+        #region Propiedades
         public static NavigationPage Navigator
         {
             get;
@@ -20,15 +23,16 @@
             get;
             internal set;
         }
+        #endregion
+
         #region Constructors
         public App()
         {
             Xamarin.Forms.DataGrid.DataGridComponent.Init();
-
             InitializeComponent();
-
-            this.MainPage = new NavigationPage(new LoginPage());
-
+                MainViewModel.GetInstance().Login = new LoginViewModel();
+                this.MainPage = new NavigationPage(new LoginPage());
+            
         }
         #endregion
 

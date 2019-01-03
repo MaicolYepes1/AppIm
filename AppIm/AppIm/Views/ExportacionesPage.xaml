@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.ExportacionesPage"
-             BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="{StaticResource BackgroundColor}"
              Title="Top Exportaciones">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView
+             BindingContext="{Binding ExportacionesControl}">
             <StackLayout
             HorizontalOptions="Center"
-            Padding="20"
-            BindingContext="{Binding Exportaciones}">
+            Padding="20">
                 <Label 
                     TextColor="{StaticResource FontColor}"
                     Text="RANKING DE EXPORTACIONES"></Label>
@@ -25,24 +25,24 @@
                            Grid.Row="1" 
                            Grid.Column="0" >
                     </Label>
-                    <DatePicker
+                    <DatePicker x:Name="dtpFechaIncial"
                         Grid.Row="1" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        MinimumDate="01/01/2017"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaInicial}" />
                     <Label VerticalOptions="Center" 
                            Text="Fecha Final :"
                            TextColor="{StaticResource FontColor}"
                            Grid.Row="2" 
                            Grid.Column="0"
                            ></Label>
-                    <DatePicker
+                    <DatePicker x:Name="dtpFechaFinal"
                         Grid.Row="2" 
                         Grid.Column="1"
-                        MinimumDate="01/01/2000"
+                        MinimumDate="01/01/2017"
                         MaximumDate="12/31/2020"
-                        Date="06/21/2018" />
+                        Date="{Binding FechaFinal}" />
                     <Label
                            VerticalOptions="Center" 
                            Text="Tipo:"
@@ -53,26 +53,40 @@
                     <Picker 
                         TextColor="{StaticResource FontColor}"
                         Grid.Row="3" 
-                        Grid.Column="1">
+                        Grid.Column="1"
+                        SelectedItem="{Binding Tipo, Mode=TwoWay}">
                         <Picker.Items>
                             <x:String>AGENCIA DE ADUANAS</x:String>
-                            <x:String>IMPORTADOR</x:String>
+                            <x:String>EXPORTADOR</x:String>
                             <x:String>ADUANA</x:String>
-                            <x:String>PAIS EMBARQUE</x:String>
+                            <x:String>PAIS DESTINO</x:String>
                         </Picker.Items>
                     </Picker>
                 </Grid>
-                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
-                </ActivityIndicator>
-                <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                <StackLayout Margin="10,0"
+                             Orientation="Vertical">
+                    <ActivityIndicator
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    x:Name="Indicator"
+                    Color="{StaticResource MainColor}"
+                    IsVisible="{Binding IsRunning}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                    </ActivityIndicator>
+                </StackLayout>
+                <StackLayout>
+                    <Button 
+                        x:Name="BotonBuscarExpo"
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Buscar" 
-                        TextColor="{StaticResource FontColor}"
+                        TextColor="Black"
                         BorderRadius="23" 
+                        Command="{Binding BuscarCommand}"
                         BackgroundColor="{StaticResource MainColor}" 
                         HeightRequest="46">
-                </Button>
+                    </Button>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

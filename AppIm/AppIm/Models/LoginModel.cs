@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppIm.Models
+﻿namespace AppIm.Models
 {
     public class LoginModel
     {

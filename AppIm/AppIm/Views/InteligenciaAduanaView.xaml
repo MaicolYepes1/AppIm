@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppIm.Views.AduanaPage"
+             NavigationPage.BackButtonTitle="Regresar"
              BackgroundColor="{StaticResource BackgroundColor}"
              BindingContext="{Binding Main,Source={StaticResource Locator}}"
              Title="Inteligencia de Aduana">
@@ -9,7 +10,7 @@
         <ScrollView
             BindingContext="{Binding Aduana}">
             <StackLayout 
-                Padding="20.0">
+                Padding="30.0">
                 <Label  VerticalOptions="Center" 
                         Text="INTELIGENCIA ADUANAS"
                         FontSize="Large"
@@ -19,6 +20,26 @@
                 </Label>
                 <Label></Label>
                 <Label></Label>
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalOptions="Center" 
+                           Text="Razón Social :"
+                           Grid.Row="0" 
+                           Grid.Column="0"
+                           TextColor="{StaticResource FontColor}">
+                    </Label>
+                    <Entry
+                           Placeholder="razón social"
+                           TextColor="Black"
+                           PlaceholderColor="Gray"
+                           Grid.Row="0" 
+                           Grid.Column="1"
+                           Text="{Binding RazonSocial, Mode=TwoWay}">
+                    </Entry>
+                </Grid>
                 <Grid Margin="10,0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -30,7 +51,9 @@
                            Grid.Column="0"
                            TextColor="{StaticResource FontColor}">
                     </Label>
-                    <Entry Placeholder="nit"
+                    <Entry
+                           Keyboard="Numeric"
+                           Placeholder="nit"
                            TextColor="Black"
                            PlaceholderColor="Gray"
                            Grid.Row="0" 
@@ -44,8 +67,8 @@
                            Grid.Column="0" >
                     </Label>
                     <DatePicker
-                         MaximumDate="12/31/2019"
-                        MinimumDate="01/01/2016"
+                        MinimumDate="01/01/2017"
+                        MaximumDate="12/31/2020"
                         x:Name="FechaInicial"
                         Date="{Binding FechaInicial, Mode=TwoWay}"
                         Grid.Row="1" 
@@ -59,14 +82,13 @@
                            Grid.Column="0"
                            ></Label>
                     <DatePicker
-                        MaximumDate="12/31/2019"
-                        MinimumDate="01/01/2016"
+                        MinimumDate="01/01/2017"
+                        MaximumDate="12/31/2020"
                         Format="dd/MM/yyyy" 
                         Date="{Binding FechaFinal, Mode=TwoWay}"
                         Grid.Row="2" 
                         Grid.Column="1"
-                        x:Name="FechaFinal"
-                        DateSelected="FechaFinal_DateSelected"/>
+                        x:Name="FechaFinal"/>
                     <Label
                            VerticalOptions="Center" 
                            Text="Tipo:"
@@ -85,13 +107,19 @@
                         </Picker.Items>
                     </Picker>
                 </Grid>
-                <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                <ActivityIndicator
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding IsRunning}"
+                    x:Name="Indicator"
+                    Color="{StaticResource MainColor}"
+                    IsRunning="{Binding IsRunning, Mode=TwoWay}">
                 </ActivityIndicator>
                 <Button IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
                         VerticalOptions="Center"
                         Margin="100,0" 
                         Text="Buscar" 
-                        TextColor="{StaticResource FontColor}"
+                        TextColor="Black"
                         BorderRadius="23" 
                         BackgroundColor="{StaticResource MainColor}" 
                         HeightRequest="46"

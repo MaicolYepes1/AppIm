@@ -4,9 +4,7 @@
     using System.Windows.Input;
     using Services;
     using System.ComponentModel;
-    using System;
-    using Newtonsoft.Json;
-    using System.Net.Http;
+    using AppIm.Models;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -21,7 +19,6 @@
         bool isRunning;
         bool isEnabled;
         bool isRemembered;
-
         #endregion
 
         #region Servicios
@@ -137,82 +134,79 @@
             }
 
         }
-
         async void Login()
         {
             IsRunning = true;
-            this.Usuario = "carolinarosero";
-            this.Pass = "Coral2013";
             if (string.IsNullOrEmpty(this.Usuario))
             {
+                IsRunning = true;
                 await dialogService.ShowMessage(
                     "Error",
                     "Debes ingresar nombre de usuario");
+                Settings.Usuario = Usuario;
+                IsRunning = false;
                 return;
             }
-
             if (string.IsNullOrEmpty(this.Pass))
             {
+                IsRunning = true;
                 await dialogService.ShowMessage(
                     "Error",
                     "Debes ingresar una contraseña");
                 Pass = string.Empty;
+                IsRunning = false;
                 return;
             }
-            
-            IsEnabled = true;
-
             var connection = await dialogService.CheckConnection();
             if (!connection.IsSuccess)
             {
+                IsRunning = true;
+                Usuario = null;
+                Pass = null;
+                IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     connection.Message);
+                IsRunning = false;
                 return;
             }
-            
-            var oLogin = LoginUsuario(Usuario, Pass);
-            if (!oLogin.Contains("Error"))
+            var oLogin = new ConsumirWebApi().LoginUsuario(Usuario, Pass);
+            if (oLogin == "One or more errors occurred.")
             {
+                var connection2 = await dialogService.CheckConnection();
+                if (!connection2.IsSuccess)
+                {
+                    IsRunning = true;
+                    Usuario = null;
+                    Pass = null;
+                    IsEnabled = true;
+                    await dialogService.ShowMessage(
+                        "Error",
+                        connection2.Message);
+                }
+            }
+            else if (!oLogin.Contains("Error"))
+            {
+                IsRunning = true;
+                Usuario = null;
+                Pass = null;
+                IsEnabled = true;
                 var mainViewModel = MainViewModel.GetInstance();
                 mainViewModel.Opciones = new OpcionesViewModel();
                 navigationService.SetMainPage("MasterView");
-                IsRunning = true;
             }
             else
             {
+                IsRunning = true;
+                Usuario = null;
+                Pass = null;
+                IsEnabled = true;
                 await dialogService.ShowMessage(
                     "Error",
                     "Usuario o Contraseña Incorrectos");
             }
-
             IsRunning = false;
-            Usuario = null;
-            Pass = null;
-            IsEnabled = true;
-
         }
         #endregion
-
-        public string LoginUsuario(string usu, string pass)
-        {
-            var client = new HttpClient();
-            string usuar = string.Empty;
-            try
-            {
-                var uri = new Uri("http://192.168.1.67/IM_Api/api/Login/Login?Usuario=" + usu  + "&Pass=" + pass);
-                var response = client.GetAsync(uri).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var data = response.Content.ReadAsStringAsync().Result;
-                    usuar = JsonConvert.DeserializeObject<string>(data);
-                }
-            }
-            catch (Exception ex)
-            {
-                usuar = ex.Message;
-            }
-                return usuar;   
-        }
     }
 }

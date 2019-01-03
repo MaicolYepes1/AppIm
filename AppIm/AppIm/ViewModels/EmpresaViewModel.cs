@@ -14,10 +14,11 @@
 
         #region Eventos
         public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<Xamarin.Forms.DateChangedEventArgs> DateSelected;
+        //public event EventHandler<Xamarin.Forms.DateChangedEventArgs> DateSelected;
         #endregion
 
         #region Atributos
+        string empresa;
         string nit;
         DateTime fechaInicial;
         DateTime fechaFinal;
@@ -64,6 +65,23 @@
                     PropertyChanged?.Invoke(
                         this,
                         new PropertyChangedEventArgs(nameof(Nit)));
+                }
+            }
+        }
+        public string Empresa
+        {
+            get
+            {
+                return empresa;
+            }
+            set
+            {
+                if (empresa != value)
+                {
+                    empresa = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Empresa)));
                 }
             }
         }
@@ -149,6 +167,7 @@
         {
 
             fechaInicial = DateTime.Now;
+            fechaFinal = DateTime.Now;
             navigationService = new NavigationService();
             dialogService = new DialogService();
             IsEnabled = true;
@@ -173,6 +192,7 @@
                 await dialogService.ShowMessage(
                     "Error",
                     "Debes ingresar un Número de Nit");
+                IsRunning = false;
                 return;
             }
             if (string.IsNullOrEmpty(this.Tipo))
@@ -180,6 +200,7 @@
                 await dialogService.ShowMessage(
                     "Error",
                     "Debes ingresar un Número Tipo 'EXPO' 'IMPO'");
+                IsRunning = false;
                 return;
             }
             var connection = await dialogService.CheckConnection();
@@ -188,53 +209,59 @@
                 await dialogService.ShowMessage(
                     "Error",
                     connection.Message);
+                IsRunning = false;
                 return;
-            }
-            //var oBuscar = BuscarAduana(Nit, FechaInicial.Date, FechaFinal.Date, Tipo);
-            //var oBuscar = BuscarAduana(Nit, fechaInicial.Date, fechaFinal.Date, Tipo);
-            //if (oBuscar != null)
-            //{
-            //    var mainViewModel = MainViewModel.GetInstance();
-            //    mainViewModel.AduanaG = new AduanaViewModelGrid();
-            //    await navigationService.NavigateOnAduana("AduanaView", oBuscar);
-            //    IsEnabled = false;
-            //    IsRunning = false;
-            //}
-            //else
-            //{
-            //    await dialogService.ShowMessage(
-            //        "Error",
-            //        "Algún dato Ingresado no es Correcto");
-            //    IsRunning = false;
-            //}
 
-            //Nit = null;
-            //IsEnabled = true;
+            }
+            var oBuscar = BuscarEmpresa(Nit, Empresa, fechaInicial.Date, fechaFinal.Date, Tipo);
+            if (oBuscar != null && tipo == "EXPO")
+            {
+                var mainViewModel = MainViewModel.GetInstance();
+                mainViewModel.EmpresaR = new EmpresaViewModelGrid();
+                await navigationService.NavigateOnEmpresa("EmpresaView", oBuscar);
+                IsEnabled = false;
+                IsRunning = false;
+            }
+            else if (oBuscar != null && tipo == "IMPO")
+            {
+                await navigationService.NavigateOnEmpresa("EmpresaImpoView", oBuscar);
+                IsEnabled = false;
+                IsRunning = false;
+            }
+            else if (oBuscar == null)
+            {
+                await dialogService.ShowMessage(
+                    "Error",
+                    "No se encontraron datos relacionados con la busqueda.");
+
+            }
+            Nit = null;
+            IsEnabled = true;
+            IsRunning = false;
         }
         #endregion
-
-        public List<InteligenciaAgenciaAduanaViewModel> BuscarAduana(string nitA, DateTime fechaIni, DateTime fechaFin, string tipoA)
+        public List<InteligenciaEmpresaViewModel> BuscarEmpresa(string nitA, string empresaA, DateTime fechaIni, DateTime fechaFin, string tipoA)
         {
             var client = new HttpClient();
-            var aduana = new List<InteligenciaAgenciaAduanaViewModel>();
+            var empresa = new List<InteligenciaEmpresaViewModel>();
             try
             {
                 var FechaInic = fechaIni.Date.ToString("dd/MM/yyyy");
                 var FechaFina = fechaFinal.Date.ToString("dd/MM/yyyy");
-                var uri = new Uri("http://192.168.1.67/IM_Api/api/Aduana/InteligenciaAduanas?ccNit="
-                    + nitA + "&ddFechaInicial=" + FechaInic + "&ddFechaFinal=" + FechaFina + "&ccTipo=" + tipoA);
+                var uri = new Uri("http://179.50.16.169/IM_Api/Api/Empresa/InteligenciaEmpresas?NombreEmpresa="
+                    + Empresa + "&cNit="+ nitA + "&dFechaInicial=" + FechaInic + "&dFechaFinal=" + FechaFina + "&cTipo=" + tipoA);
                 var response = client.GetAsync(uri).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     var data = response.Content.ReadAsStringAsync().Result;
-                    aduana = JsonConvert.DeserializeObject<List<InteligenciaAgenciaAduanaViewModel>>(data);
+                    empresa = JsonConvert.DeserializeObject<List<InteligenciaEmpresaViewModel>>(data);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                aduana = null;
+                empresa = null;
             }
-            return aduana;
+            return empresa;
         }
     }
 }
